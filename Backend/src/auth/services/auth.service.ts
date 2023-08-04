@@ -18,10 +18,10 @@ export class AuthService {
         
         if(!user)throw new BadRequestException();
 
-        // if(!bcrypt.compare(password,user.password))
-        // throw new UnauthorizedException();
-        if(user.password!=password)
+        if(!bcrypt.compare(password,user.password))
         throw new UnauthorizedException();
+        // if(user.password!=password)
+        // throw new UnauthorizedException();
         return user;
     }
     async generateToken(user: any):Promise<any> {
