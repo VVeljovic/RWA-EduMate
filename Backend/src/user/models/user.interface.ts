@@ -1,3 +1,5 @@
+import { IPost } from "src/post/models/post.interface";
+
 export interface IUser {
     id?:number;
     name:string;
@@ -6,4 +8,5 @@ export interface IUser {
     course:string;
     year:number;
     password:string;
+    posts:IPost[];
 }
