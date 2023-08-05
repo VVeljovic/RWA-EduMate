@@ -8,7 +8,7 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UserService {
     constructor(@InjectRepository(UserEntity)
-    private readonly userRepository:Repository<UserEntity>){}
+    public readonly userRepository:Repository<UserEntity>){}
 
     async register(user:IUser):Promise<IUser>{
         const salt =  await bcrypt.genSalt();

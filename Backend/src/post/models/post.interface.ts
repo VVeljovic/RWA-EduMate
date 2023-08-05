@@ -4,5 +4,5 @@ export interface IPost {
     id?:number;
     body?:string;
     createdAt?:Date;
-    user?:IUser
+    author?:IUser
 }

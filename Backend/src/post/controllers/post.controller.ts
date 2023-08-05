@@ -1,8 +1,10 @@
-import { Controller, Post, Body, Get, Put, Param, Delete} from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Param, Delete,Request} from '@nestjs/common';
 import { PostService } from '../services/post.service';
 import { IPost } from '../models/post.interface';
 import {Observable}from 'rxjs';
 import {UpdateResult, DeleteResult}from 'typeorm';
+import { JwtAuthGuard } from 'src/auth/jwtStrategy/jwt-auth.guard';
+import { UseGuards } from '@nestjs/common/decorators';
 @Controller('post')
 export class PostController {
 
@@ -10,9 +12,10 @@ export class PostController {
     {
 
     }
+    @UseGuards(JwtAuthGuard)
  @Post()
- createPost(@Body() post:IPost){
-     return this.postService.createPost(post);
+ createPost(@Body() post:IPost, @Request()req){
+     return this.postService.createPost(req.user,post);
  }
  @Get()
  findAll():Observable<IPost[]>
@@ -32,5 +35,24 @@ export class PostController {
  ):Observable<DeleteResult>{
     return this.postService.deletePost(id);
  }
-
+ @Get()
+ findSpecificPosts(
+   @Param('idUser')userId?:number
+ ):Observable<IPost[]>
+ {
+   return (this.postService.findAllPosts());
+ }
+ @Get('getPostsFromUser/:idUser')
+ findAllPostsFromUser(
+   @Param('idUser')idUser?:number):Observable<IPost[]>
+   {
+      
+      return(this.postService.findPostsFromUser(idUser));
+   }
+   @Get('getFilteredPosts/:course?/:year?')
+ getFilteredPosts(@Param('course')course?:string,@Param('year')year?:number):Observable<IPost[]>
+ {
+   console.log(course);
+   return(this.postService.getFilteredPosts(course,year));
+ }
 }

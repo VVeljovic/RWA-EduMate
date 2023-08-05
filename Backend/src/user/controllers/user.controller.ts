@@ -9,7 +9,7 @@ export class UserController {
     {
 
     }
-    @Post()
+    @Post('signUp')
     signUp(@Body()user:IUser)
     {
         return this.userService.register(user);

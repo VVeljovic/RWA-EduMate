@@ -18,10 +18,11 @@ export class AuthService {
         
         if(!user)throw new BadRequestException();
 
-        if(!bcrypt.compare(password,user.password))
-        throw new UnauthorizedException();
-        // if(user.password!=password)
-        // throw new UnauthorizedException();
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+
+        if (!isPasswordValid) {
+          throw new UnauthorizedException('Invalid credentials');
+        }
         return user;
     }
     async generateToken(user: any):Promise<any> {

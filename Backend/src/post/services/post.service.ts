@@ -4,6 +4,7 @@ import {Repository,UpdateResult,DeleteResult} from 'typeorm';
 import {InjectRepository} from '@nestjs/typeorm'
 import { IPost } from '../models/post.interface';
 import {Observable,from} from 'rxjs';
+import { IUser } from 'src/user/models/user.interface';
 
 @Injectable()
 export class PostService {
@@ -11,7 +12,8 @@ export class PostService {
         @InjectRepository(PostEntity)
         private readonly postRepository:Repository<PostEntity>
     ){}
-        createPost(post:IPost): Observable<IPost>{
+        createPost(user:IUser,post:IPost): Observable<IPost>{
+            post.author=user;
             return from( this.postRepository.save(post));
         }
         findAllPosts():Observable<IPost[]>{
@@ -22,5 +24,17 @@ export class PostService {
         }
         deletePost(id:number):Observable<DeleteResult>{
             return from(this.postRepository.delete(id));
+        }
+        findPostsFromUser(userId:number):Observable<IPost[]>{
+            return from(this.postRepository.find({
+                where:{author:{id:userId}}
+            }))
+        }
+        getFilteredPosts(course:string,year:number):Observable<IPost[]>{
+            return from(this.postRepository.createQueryBuilder('post')
+            .innerJoinAndSelect('post.author', 'author') 
+            .where(course!=undefined ? 'author.course = :course' : '1 = 1', { course })
+            .andWhere(year!=undefined? 'author.year=:year':'1=1',{year})
+            .getMany())
         }
 }
