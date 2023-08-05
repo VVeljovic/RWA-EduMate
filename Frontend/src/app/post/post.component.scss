@@ -1,0 +1,58 @@
+.post {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  width: 600px; /* Povećana širina */
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+
+  .username {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+
+.post-content {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.post-actions {
+  margin-top: 10px;
+
+  .like-button,
+  .comment-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: inline-block;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
