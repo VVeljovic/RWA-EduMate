@@ -17,7 +17,7 @@ export class PostService {
             return from( this.postRepository.save(post));
         }
         findAllPosts():Observable<IPost[]>{
-            return from(this.postRepository.find());
+            return from(this.postRepository.createQueryBuilder('post').innerJoinAndSelect('post.author','author').getMany());
         }
         updatePost(id:number,post:IPost) : Observable<UpdateResult>{
             return from(this.postRepository.update(id,post));

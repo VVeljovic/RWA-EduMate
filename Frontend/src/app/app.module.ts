@@ -6,21 +6,31 @@ import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
-import { PostComponent } from './post/post.component';
-import { PostListComponent } from './post/post-list/post-list.component';
+import { CreatePostComponent } from './components/create-post/create-post.component';
+import { PostViewComponent } from './components/post-view/post-view.component';
+import { UserInfoComponent } from './userPage/user-info/user-info.component';
+import { LoginCardComponent } from './loginPage/login-card/login-card.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { FrontPageComponent } from './front-page/front-page.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    PostComponent,
-    PostListComponent
+    CreatePostComponent,
+    PostViewComponent,
+    UserInfoComponent,
+    LoginCardComponent,
+    NavigationComponent,
+    FrontPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    MdbCollapseModule 
+    MdbCollapseModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
