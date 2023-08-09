@@ -8,6 +8,7 @@ import { FrontPageComponent } from './front-page/front-page.component';
 const routes: Routes = [
 { path:'',component:FrontPageComponent,},
 {path:'login',component:LoginCardComponent},
+{path:'signUp',component:LoginCardComponent},
 {path:'user/:userId',component:UserInfoComponent}
 ];
 

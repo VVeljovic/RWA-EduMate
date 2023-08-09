@@ -1,1 +1,51 @@
-<p>login-card works!</p>
+<body>
+<div class="signup-form">
+    <div class="container">
+      <div class="header">
+        <h1 *ngIf="!isLoginRoute()">Create an Account</h1>
+        <h1 *ngIf="isLoginRoute()">Log In</h1>
+        <p>EduMate</p>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="input" *ngIf="!isLoginRoute()">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" placeholder="Name" />
+        </div>
+        <div class="input" *ngIf="!isLoginRoute()">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" placeholder="Surname" />
+        </div>
+        <div class="input" *ngIf="!isLoginRoute()">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" placeholder="Course" />
+        </div>
+        <div class="input" *ngIf="!isLoginRoute()">
+          <i class="fa-solid fa-user"></i>
+          <input type="number" placeholder="year" />
+        </div>
+        <div class="input">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" placeholder="Username" formControlName="username" />
+        </div>
+        <div class="input" *ngIf="!isLoginRoute()">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" placeholder="Email" />
+        </div>
+        <div class="input">
+          <i class="fa-solid fa-lock"></i>
+          <input type="password" placeholder="Password" formControlName="password" />
+        </div>
+        <input class="signup-btn" type="submit" value="SIGN UP" *ngIf ="!isLoginRoute()"/>
+        <input class="signup-btn" type="submit" value="LOG IN" *ngIf ="isLoginRoute()"/>
+      </form>
+      <!-- <p>Or sign up with</p>
+      <div class="social-icons">
+        <i class="fa-brands fa-facebook-f"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-google"></i>
+      </div> -->
+      <p *ngIf="!isLoginRoute()">Already have an account <a [routerLink]="['/login']">log in</a></p>
+      <p *ngIf="isLoginRoute()">Still don't have an account? <a [routerLink]="['/signUp']">sign up</a></p>
+    </div>
+  </div>
+</body>

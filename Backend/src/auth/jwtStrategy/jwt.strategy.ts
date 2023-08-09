@@ -18,7 +18,10 @@ async validate(payload:any)
 {
    return{
     id:payload.sub,
-    name:payload.name
+    name:payload.name,
+    surname:payload.surname,
+    year:payload.year,
+    course:payload.course
    }
 }
 }

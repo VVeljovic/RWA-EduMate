@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Post } from 'src/app/models/post.model';
 import { PostService } from 'src/app/services/post.service';
 @Component({
@@ -8,11 +9,10 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class PostViewComponent {
 
-      public posts:Post[]=[];
+      public posts:Observable<Post[]>;
       constructor(private postService:PostService){
-        this.posts=this.postService.getPosts().subscribe((posts: any)=>{
-          this.posts = posts;
-        });
+       this.posts =  this.postService.getPosts();
+       
       }
-
+     
 }

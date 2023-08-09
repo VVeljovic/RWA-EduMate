@@ -13,7 +13,7 @@ import { LoginCardComponent } from './loginPage/login-card/login-card.component'
 import { NavigationComponent } from './navigation/navigation.component';
 import { FrontPageComponent } from './front-page/front-page.component';
 import {HttpClientModule} from '@angular/common/http';
-
+import {ReactiveFormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +30,8 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     NoopAnimationsModule,
     MdbCollapseModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

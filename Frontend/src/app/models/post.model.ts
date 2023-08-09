@@ -1,4 +1,6 @@
 import { User } from "./user.model";
-export class Post {
-    constructor(public postId:number,public title:string,public body:string,public author:User){}
+export interface Post {
+     postId:number;
+     body:string;
+     author:User;
 }
