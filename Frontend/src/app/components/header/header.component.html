@@ -73,7 +73,9 @@
             alt=""
             loading="lazy"
           />
-          <strong class="d-none d-sm-block ms-1">Veljko</strong>
+          <div *ngIf="user$ | async as user">
+          <strong class="d-none d-sm-block ms-1">{{user.name}}</strong>
+      </div> 
         </a>
       </li>
       

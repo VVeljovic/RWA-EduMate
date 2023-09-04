@@ -14,6 +14,10 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { FrontPageComponent } from './front-page/front-page.component';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
+import {StoreModule} from '@ngrx/store';
+import {reducers} from '../app/store/reducers';
+import { AuthEffects } from './store/auth/auth.effects';
+import { EffectsModule } from '@ngrx/effects';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +35,9 @@ import {ReactiveFormsModule} from '@angular/forms';
     NoopAnimationsModule,
     MdbCollapseModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

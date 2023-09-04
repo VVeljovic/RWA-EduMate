@@ -12,18 +12,24 @@ export class UserService {
   private readonly userUrl = 'http://localhost:3000/auth/user';
   constructor(private http:HttpClient) { 
   }
-  public login(username:string,password:string):Observable<string>{
+  public login(username: string, password: string): Observable<{ access_token: string }> {
     const body = {
-        username:username,
-        password:password
-    }
-     return this.http.post<string>(this.loginUrl,body);
+      username: username,
+      password: password
+    };
+  
+    return this.http.post<{ access_token: string }>(this.loginUrl, body);
   }
-  public getUser(token:string)
-  {
-       const headers = new HttpHeaders({
-        'Authorization':`Bearer ${token}`
+  
+  public getUser(tokenObj: { access_token: string }) {
+    // Izvucite vrednost access_token iz objekta
+    const extractedToken = tokenObj.access_token;
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${extractedToken}`
     });
-    return this.http.get<User>(this.userUrl,{headers});
+  
+    return this.http.get<User>(this.userUrl, { headers });
   }
+  
 }
