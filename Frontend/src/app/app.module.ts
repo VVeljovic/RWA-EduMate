@@ -19,6 +19,7 @@ import {reducers} from '../app/store/reducers';
 import { AuthEffects } from './store/auth/auth.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { PostEffects } from './store/posts/post.effects';
+import { CommentPopupComponent } from './components/comment-popup/comment-popup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { PostEffects } from './store/posts/post.effects';
     UserInfoComponent,
     LoginCardComponent,
     NavigationComponent,
-    FrontPageComponent
+    FrontPageComponent,
+    CommentPopupComponent
   ],
   imports: [
     BrowserModule,

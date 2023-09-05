@@ -10,6 +10,7 @@ import { selectUser } from 'src/app/store/auth/auth.selector';
 })
 export class HeaderComponent implements OnInit{
  user$:Observable<User|null>|undefined;
+ 
 constructor(private store:Store){}
 ngOnInit(): void {
   this.user$ = this.store.select(selectUser);
