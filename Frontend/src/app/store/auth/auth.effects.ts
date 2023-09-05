@@ -23,16 +23,22 @@ export class AuthEffects {
       )
     )
   );
-
   getUser$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.loginSuccess),
-      switchMap(({ authToken }) =>
-        this.authService.getUser(authToken).pipe(
+  this.actions$.pipe(
+    ofType(AuthActions.loginSuccess),
+    switchMap(({ authToken, user }) => {
+      if (user) {
+        // Ako je user već postavljen, ne treba ponovo pozivati getUser
+        return of(); // Nema emitovanja nove akcije
+      } else {
+        // Ako user nije postavljen, pozovite getUser
+        return this.authService.getUser(authToken).pipe(
           map((user) => AuthActions.loginSuccess({ user, authToken })),
           catchError((error) => of(AuthActions.loginFailure({ error })))
-        )
-      )
-    )
-  );
+        );
+      }
+    })
+  )
+);
+
 }

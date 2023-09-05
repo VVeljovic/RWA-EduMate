@@ -9,19 +9,19 @@
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="input" *ngIf="!isLoginRoute()">
           <i class="fa-solid fa-user"></i>
-          <input type="text" placeholder="Name" />
+          <input type="text" placeholder="Name" formControlName="name"  />
         </div>
         <div class="input" *ngIf="!isLoginRoute()">
           <i class="fa-solid fa-user"></i>
-          <input type="text" placeholder="Surname" />
+          <input type="text" placeholder="Surname" formControlName="surname"  />
         </div>
         <div class="input" *ngIf="!isLoginRoute()">
           <i class="fa-solid fa-user"></i>
-          <input type="text" placeholder="Course" />
+          <input type="text" placeholder="Course" formControlName="course" />
         </div>
         <div class="input" *ngIf="!isLoginRoute()">
           <i class="fa-solid fa-user"></i>
-          <input type="number" placeholder="year" />
+          <input type="number" placeholder="year" formControlName="year" />
         </div>
         <div class="input">
           <i class="fa-solid fa-user"></i>
@@ -29,7 +29,7 @@
         </div>
         <div class="input" *ngIf="!isLoginRoute()">
           <i class="fa-solid fa-envelope"></i>
-          <input type="email" placeholder="Email" />
+          <input type="email" placeholder="Email" formControlName="email" />
         </div>
         <div class="input">
           <i class="fa-solid fa-lock"></i>

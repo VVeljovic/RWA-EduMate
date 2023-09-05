@@ -3,13 +3,11 @@ import { Post } from '../models/post.model';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private readonly loginUrl = 'http://localhost:3000/auth/login';
-  private readonly userUrl = 'http://localhost:3000/auth/user';
   constructor(private http:HttpClient) { 
   }
   public login(username: string, password: string): Observable<{ access_token: string }> {
@@ -17,19 +15,30 @@ export class UserService {
       username: username,
       password: password
     };
-  
-    return this.http.post<{ access_token: string }>(this.loginUrl, body);
+    console.log(body);
+    return this.http.post<{ access_token: string }>(environment.api+"auth/login", body);
   }
-  
   public getUser(tokenObj: { access_token: string }) {
-    // Izvucite vrednost access_token iz objekta
     const extractedToken = tokenObj.access_token;
   
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${extractedToken}`
     });
-  
-    return this.http.get<User>(this.userUrl, { headers });
+    return this.http.get<User>(environment.api+"auth/user", { headers });
+  }
+  public signUp(name:string, surname: string, course:string, year: number, username:string,email:string,password:string):Observable<{}>
+  {
+    const body = {
+      name:name,
+      surname:surname,
+      course:course,
+      year:year,
+      username:username,
+      email:email,
+      password:password
+    }
+    console.log(body);
+    return this.http.post(environment.api+"user/signUp",body);
   }
   
 }

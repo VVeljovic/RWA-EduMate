@@ -1,22 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Post } from '../models/post.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Post } from '../models/post.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostService {
-  private posts: Observable<Post[]> = new Observable<Post[]>();
-  private readonly postsUrl = 'http://localhost:3000/post';
-  constructor(private http:HttpClient) { 
-    this.refreshPosts();
-  }
-  private refreshPosts():Observable<Post[]>{
-    this.posts = this.http.get<Post[]>(this.postsUrl);
-    return this.posts;
-  }
-  public getPosts(){
-    return this.posts;
+  constructor(private http: HttpClient) {}
+
+  public getPosts(): Observable<Post[]> {
+    console.log("AAAAAA");
+    return this.http.get<Post[]>(environment.api + "post");
   }
 }
