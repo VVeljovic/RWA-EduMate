@@ -37,4 +37,7 @@ export class PostService {
             .andWhere(year!=undefined? 'author.year=:year':'1=1',{year})
             .getMany())
         }
+        findPostById(id:number):Observable<IPost>{
+            return from(this.postRepository.findOne({ where: { id } }));
+        }
 }

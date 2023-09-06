@@ -1,3 +1,4 @@
+import { CommentEntity } from "src/comments/models/comment.entity";
 import { PostEntity } from "src/post/models/post.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -19,5 +20,7 @@ export class UserEntity{
     password:string;
     @OneToMany(()=>PostEntity,(postEntity)=>postEntity.author)
     posts:PostEntity[];
+   // @OneToMany(()=>CommentEntity,(commentEntity)=>commentEntity.author)
+   // comments:CommentEntity[];
 
 }

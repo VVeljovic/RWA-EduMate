@@ -7,6 +7,8 @@ import { PostModule } from './post/post.module';
 import { UserController } from './user/controllers/user.controller';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { CommentsController } from './comments/controllers/comments.controller';
+import { CommentModule } from './comments/comment.module';
 
 
 @Module({
@@ -22,7 +24,7 @@ import { AuthModule } from './auth/auth.module';
       autoLoadEntities:true,
       synchronize:true,
     }),
-    PostModule, UserModule,AuthModule
+    PostModule, UserModule,AuthModule,CommentModule
   ],
   controllers: [AppController],
   providers: [AppService],
