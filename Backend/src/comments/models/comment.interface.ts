@@ -5,6 +5,6 @@ export interface IComment {
     id?:number;
     content:string;
     createdAt?:Date;
-   // author:IUser;
+    author:IUser;
     post:IPost
 }

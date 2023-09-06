@@ -20,7 +20,7 @@ export class UserEntity{
     password:string;
     @OneToMany(()=>PostEntity,(postEntity)=>postEntity.author)
     posts:PostEntity[];
-   // @OneToMany(()=>CommentEntity,(commentEntity)=>commentEntity.author)
-   // comments:CommentEntity[];
+    @OneToMany(()=>CommentEntity,(commentEntity)=>commentEntity.author)
+    comments:CommentEntity[];
 
 }

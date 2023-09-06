@@ -12,8 +12,8 @@ export class CommentEntity{
     createdAt:Date;
     @ManyToOne(()=>PostEntity,(postEntity)=>postEntity.comments)
     post:CommentEntity;
-   // @ManyToOne(()=>UserEntity,(userEntity)=>userEntity.comments)
-  //  author:UserEntity;
+    @ManyToOne(()=>UserEntity,(userEntity)=>userEntity.comments)
+    author:UserEntity;
 
 
 }

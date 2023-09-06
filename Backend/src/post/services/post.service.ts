@@ -5,6 +5,7 @@ import {InjectRepository} from '@nestjs/typeorm'
 import { IPost } from '../models/post.interface';
 import {Observable,from} from 'rxjs';
 import { IUser } from 'src/user/models/user.interface';
+import { IComment } from 'src/comments/models/comment.interface';
 
 @Injectable()
 export class PostService {
@@ -40,4 +41,5 @@ export class PostService {
         findPostById(id:number):Observable<IPost>{
             return from(this.postRepository.findOne({ where: { id } }));
         }
+
 }
