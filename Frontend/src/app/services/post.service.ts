@@ -15,7 +15,7 @@ export class PostService {
   public getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(environment.api + "post");
   }
-  public createPost(body:string){
+  public createPost(body:string):Observable<Post>{
     let jwtToken :any;
     this.authToken$.subscribe((authToken) => {
       jwtToken = authToken?.access_token;
@@ -23,15 +23,17 @@ export class PostService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${jwtToken}`,
     });
-    this.http.post(environment.api+"post", {body}, { headers }).subscribe(
-      (response) => {
-        console.log('Uspešno kreiran post:', response);
-      },
-      (error) => {
-        console.error('Greška pri kreiranju posta:', error);
-      }
-    );
+    // return this.http.post(environment.api+"post", {body}, { headers }).subscribe(
+    //   (response) => {
+    //     console.log('Uspešno kreiran post:', response);
+    //   },
+    //   (error) => {
+    //     console.error('Greška pri kreiranju posta:', error);
+    //   }
+    // );
+    return this.http.post<Post>(environment.api + "post", { body }, { headers });
   }
   }
+  
   
 

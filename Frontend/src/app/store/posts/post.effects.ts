@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { PostService } from '../../services/post.service';
 import * as fromPostActions from './post.actions';
-
+import { Post } from 'src/app/models/post.model';
 @Injectable()
 export class PostEffects {
   constructor(private actions$: Actions, private postService: PostService) {}
@@ -20,4 +20,15 @@ export class PostEffects {
       )
     )
   );
+  createPost$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(fromPostActions.createPost),
+    switchMap(({ post }) =>
+      this.postService.createPost(post.body).pipe(
+        map((response) => fromPostActions.createPostSuccess({ post:response })),
+        catchError((error) => of(fromPostActions.createPostFailure({ error })))
+      )
+    )
+  )
+);
 }

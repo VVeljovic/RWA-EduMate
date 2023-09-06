@@ -26,5 +26,9 @@ export const postReducer = createReducer(
     ...state,
     loading: false,
     error,
+  })),
+  on(fromPostActions.createPost, (state, { post }) => ({
+    ...state,
+    posts: [...state.posts,  post ],
   }))
 );
