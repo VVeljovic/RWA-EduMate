@@ -4,7 +4,7 @@
 			<h2>Comments</h2>
 			<div class="tag">12</div>
 		</div>
-		<div class="group-radio">
+		<!-- <div class="group-radio">
 			<span class="button-radio">
 				<input id="latest" name="latest" type="radio" checked>
 				<label for="latest">Latest</label>
@@ -14,7 +14,7 @@
 				<input id="popular" name="latest" type="radio">
 				<label for="popular">Popular</label>
 			</span>
-		</div>
+		</div> -->
 	</div>
 	<div class="writing">
 		<div contenteditable="true" class="textarea" autofocus spellcheck="false">
@@ -33,19 +33,19 @@
 			</div>
 		</div>
 	</div>
-	<div class="comment">
+	<div class="comment" *ngFor="let comment of comment$ | async">
 		<div class="user-banner">
 			<div class="user">
 				<div class="avatar">
 					<img src="https://randomuser.me/api/portraits/men/86.jpg">
 					<span class="stat grey"></span>
 				</div>
-				<h5>Floyd Miles</h5>
+				<h5>{{comment.author.username}}</h5>
 			</div>
 			<button class="btn dropdown"><i class="ri-more-line"></i></button>
 		</div>
 		<div class="content">
-			<p>Actually, now that I try out the links on my message, above, none of them take me to the secure site. Only my shortcut on my desktop, which I created years ago.</p>
+			<p>{{comment.content}}</p>
 		</div>
 		<div class="footer">
 			<button class="btn"><i class="ri-emotion-line"></i></button>
@@ -59,7 +59,7 @@
 			<span class="is-mute">6 hour</span>
 		</div>
 	</div>
-	<div>
+	<!-- <div>
 		<div class="comment">
 			<div class="user-banner">
 				<div class="user">
@@ -111,4 +111,4 @@
 	<div class="load">
 		<span><i class="ri-refresh-line"></i>Loading</span>
 	</div>
-</div>
+</div> -->

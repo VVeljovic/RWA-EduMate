@@ -20,6 +20,7 @@ import { AuthEffects } from './store/auth/auth.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { PostEffects } from './store/posts/post.effects';
 import { CommentPopupComponent } from './components/comment-popup/comment-popup.component';
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { CommentPopupComponent } from './components/comment-popup/comment-popup.
     MdbCollapseModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatDialogModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects,PostEffects])
   ],

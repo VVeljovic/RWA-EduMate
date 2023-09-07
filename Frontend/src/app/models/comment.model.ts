@@ -1,6 +1,6 @@
 import { User } from "./user.model";
-export interface Post {
+export interface Comment {
      id:number;
-     body:string;
+     content:string;
      author:User;
 }

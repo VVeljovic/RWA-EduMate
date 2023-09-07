@@ -31,7 +31,7 @@ export class CreatePostComponent implements OnInit{
       if (user) {
        const post : Post = {
         body:postContent,
-        postId:10,
+        id:Math.random(),
         author:user
        }
        this.store.dispatch(PostActions.createPost({post}));

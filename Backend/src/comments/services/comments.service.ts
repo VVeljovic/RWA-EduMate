@@ -17,8 +17,12 @@ export class CommentsService {
         return from(this.commentRepository.save(comment));
     }
     findAllComments(postId:number):Observable<IComment[]>{
-           return from(this.commentRepository.find({
-            where:{post:{id:postId}}
-           }))
+        return from(
+            this.commentRepository
+              .createQueryBuilder('comment')
+              .innerJoinAndSelect('comment.author', 'author') // Spojite komentare i korisnike
+              .where('comment.postId = :postId', { postId })
+              .getMany()
+          );
     }
 }
