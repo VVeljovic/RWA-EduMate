@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { CommentsController } from './comments/controllers/comments.controller';
 import { CommentModule } from './comments/comment.module';
+import { ChatModule } from './chat/chat.module';
 
 
 @Module({
@@ -24,7 +25,7 @@ import { CommentModule } from './comments/comment.module';
       autoLoadEntities:true,
       synchronize:true,
     }),
-    PostModule, UserModule,AuthModule,CommentModule
+    PostModule, UserModule,AuthModule,CommentModule, ChatModule
   ],
   controllers: [AppController],
   providers: [AppService],

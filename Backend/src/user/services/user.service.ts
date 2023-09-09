@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../models/user.entity';
 import { Repository } from 'typeorm';
 import { IUser } from '../models/user.interface';
-import { Observable,from } from 'rxjs';
+import { Observable,from,map } from 'rxjs';
 import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UserService {
@@ -20,4 +20,13 @@ export class UserService {
         const user = await this.userRepository.findOne({ where: { username } });
         return user ? user : null;
       }
+      async getUsersOnSameCourse(course:string):Promise<Observable<IUser[]>>{
+        const users$ = from(
+            this.userRepository.find({
+              where: { course}, 
+            }),
+          );
+      
+          return users$;
+        }    
 }

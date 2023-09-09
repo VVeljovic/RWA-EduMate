@@ -16,23 +16,24 @@
 			</span>
 		</div> -->
 	</div>
-	<div class="writing">
-		<div contenteditable="true" class="textarea" autofocus spellcheck="false">
-			<p>Hi <a class="tagged-user">@Jo</a></p>
-		</div>
-		<div class="footer">
+	<form [formGroup]="commentForm" (ngSubmit)="sendComment()">
+		<div class="writing">
+		  <input type="text" class="textarea" formControlName="commentText" autofocus spellcheck="false">
+		  <div class="footer">
 			<div class="text-format">
-				<button class="btn"><i class="ri-bold"></i></button>
-				<button class="btn"><i class="ri-italic"></i></button>
-				<button class="btn"><i class="ri-underline"></i></button>
-				<button class="btn"><i class="ri-list-unordered"></i></button>
+			  <button class="btn"><i class="ri-bold"></i></button>
+			  <button class="btn"><i class="ri-italic"></i></button>
+			  <button class="btn"><i class="ri-underline"></i></button>
+			  <button class="btn"><i class="ri-list-unordered"></i></button>
 			</div>
 			<div class="group-button">
-				<button class="btn"><i class="ri-at-line"></i></button>
-				<button class="btn primary">Send</button>
+			  <button class="btn"><i class="ri-at-line"></i></button>
+			  <button class="btn primary" type="submit">Send</button>
 			</div>
+		  </div>
 		</div>
-	</div>
+	  </form>
+	  
 	<div class="comment" *ngFor="let comment of comment$ | async">
 		<div class="user-banner">
 			<div class="user">
