@@ -40,7 +40,7 @@ export class UserService {
     console.log(body);
     return this.http.post(environment.api+"user/signUp",body);
   }
-  getProfileImage(imageName:string) :Observable<Blob>{
+  getProfileImage(imageName:string) {
     const requestOptions: Object = { responseType: 'blob' };
     return this.http.get<Blob>(`${environment.api}user/profile-image/${imageName}`, requestOptions);
   }

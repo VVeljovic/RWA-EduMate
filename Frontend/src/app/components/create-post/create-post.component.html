@@ -26,7 +26,12 @@
             <div class="options">
               <p>Add to Your Post</p>
               <ul class="list">
-                <li><img src="https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-vector-picture-icon-png-image_695350.jpg" alt="gallery"></li>
+                <li>
+                  <label for="galleryInput" class="image-upload">
+                  <img src="https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-vector-picture-icon-png-image_695350.jpg" alt="gallery">
+                  <input type="file" id="galleryInput" style="display: none;" (change)="handleGalleryImageSelect($event)">
+                </label>
+              </li>
                 <!-- <li><img src="icons/tag.svg" alt="gallery"></li>
                 <li><img src="icons/emoji.svg" alt="gallery"></li>
                 <li><img src="icons/mic.svg" alt="gallery"></li>

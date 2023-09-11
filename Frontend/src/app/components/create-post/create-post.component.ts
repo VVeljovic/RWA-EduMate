@@ -43,4 +43,12 @@ export class CreatePostComponent implements OnInit{
     
   
   }
+  handleGalleryImageSelect(event: any): void {
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile) {
+      // Ovde možete obraditi izabranu sliku (npr. prikazati je ili poslati na server)
+      console.log('Izabrana slika iz galerije:', selectedFile);
+    }
+  }
 }
