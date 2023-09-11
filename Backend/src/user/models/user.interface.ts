@@ -9,4 +9,5 @@ export interface IUser {
     year:number;
     password:string;
     posts:IPost[];
+    image?:string;
 }

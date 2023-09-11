@@ -63,17 +63,16 @@
     <!-- Center elements -->
 
     <!-- Right elements -->
-    <ul class="navbar-nav flex-row">
+    <ul class="navbar-nav flex-row" *ngIf="user$ | async as user">
       <li class="nav-item me-3 me-lg-1">
         <a class="nav-link d-sm-flex align-items-sm-center" routerLink="/login">
-          <img
-            src="https://mdbootstrap.com/img/new/avatars/1.webp"
-            class="rounded-circle"
-            height="22"
-            alt=""
-            loading="lazy"
-          />
-          <div *ngIf="user$ | async as user">
+          <img [src]="getImageUrl()" 
+          class="rounded-circle"
+          height="22"
+          alt=""
+          loading="lazy"
+        />
+          <div>
           <strong class="d-none d-sm-block ms-1">{{user.name}}</strong>
       </div> 
         </a>

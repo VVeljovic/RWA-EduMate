@@ -24,6 +24,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { ChatComponent } from './components/chat/chat.component';
 import { SocketIoConfig,SocketIoModule } from 'ngx-socket-io';
 import { ChatService } from './services/chat.service';
+import { UserImageEffects } from './store/profileImage/image.effects';
 const config:SocketIoConfig = {url: 'http://localhost:3000',options:{}};
 @NgModule({
   declarations: [
@@ -47,7 +48,7 @@ const config:SocketIoConfig = {url: 'http://localhost:3000',options:{}};
     ReactiveFormsModule,
     MatDialogModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects,PostEffects]),
+    EffectsModule.forRoot([AuthEffects,PostEffects,UserImageEffects]),
     FormsModule,
     SocketIoModule.forRoot(config)
   ],

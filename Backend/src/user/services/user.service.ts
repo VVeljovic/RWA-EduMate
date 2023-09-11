@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../models/user.entity';
 import { Repository } from 'typeorm';
 import { IUser } from '../models/user.interface';
-import { Observable,from,map } from 'rxjs';
+import { Observable,from,map, switchMap } from 'rxjs';
 import * as bcrypt from 'bcrypt';
 @Injectable()
 export class UserService {
@@ -28,5 +28,17 @@ export class UserService {
           );
       
           return users$;
-        }    
+        }  
+        
+       async updateUser(id:number,newUser:IUser): Promise<IUser>{
+          const existingUser: IUser | undefined = await this.userRepository.findOne({ where: { id } });
+          if (!existingUser) {
+            throw new NotFoundException(`Korisnik sa ID ${id} nije pronađen.`);
+        }
+        else 
+        {
+          existingUser.image=newUser.image;
+          return await this.userRepository.save(existingUser);
+        }
+        }
 }

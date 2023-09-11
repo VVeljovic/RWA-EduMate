@@ -5,4 +5,5 @@ export interface User {
     username:string; 
        course:string; 
        year:number;
+       image?:string;
 }

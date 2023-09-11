@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Post } from '../models/post.model';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient,HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { environment } from 'src/environments/environment';
@@ -39,6 +39,10 @@ export class UserService {
     }
     console.log(body);
     return this.http.post(environment.api+"user/signUp",body);
+  }
+  getProfileImage(imageName:string) :Observable<Blob>{
+    const requestOptions: Object = { responseType: 'blob' };
+    return this.http.get<Blob>(`${environment.api}user/profile-image/${imageName}`, requestOptions);
   }
   
 }

@@ -16,6 +16,8 @@ export class UserEntity{
     course:string;
     @Column()
     year:number;
+    @Column({nullable:true})
+    image:string;
     @Column({default:''})
     password:string;
     @OneToMany(()=>PostEntity,(postEntity)=>postEntity.author)
