@@ -10,7 +10,8 @@ export class PostEntity{
     
     @Column({default:''})
     body:string;
-
+    @Column({nullable:true})
+    image:string;
     @Column({default:()=>'CURRENT_TIMESTAMP'})
     createdAt:Date;
     @ManyToOne(()=>UserEntity,(userEntity)=>userEntity.posts)

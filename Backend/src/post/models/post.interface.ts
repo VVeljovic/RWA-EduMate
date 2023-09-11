@@ -5,6 +5,7 @@ export interface IPost {
     id?:number;
     body?:string;
     createdAt?:Date;
+    image?:string;
     author?:IUser;
     comments?:IComment[];
 }

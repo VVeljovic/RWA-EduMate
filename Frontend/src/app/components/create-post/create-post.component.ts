@@ -14,6 +14,7 @@ import { selectUser } from 'src/app/store/auth/auth.selector';
 })
 export class CreatePostComponent implements OnInit{
   postForm:FormGroup = new FormGroup({});
+  selectedImage: File | null = null;
   constructor(private fb:FormBuilder,private service:PostService,private store:Store){}
   ngOnInit() {
     this.postForm = this.fb.group({
@@ -22,9 +23,8 @@ export class CreatePostComponent implements OnInit{
   }
   handlePostClick(event: Event) {
     event.preventDefault(); 
-
-    
     const postContent = this.postForm.get('postContent')?.value;
+  
     let user$ :Observable<User|null>|undefined;
     user$ = this.store.select(selectUser);
     user$.subscribe((user) => {
@@ -43,11 +43,11 @@ export class CreatePostComponent implements OnInit{
     
   
   }
-  handleGalleryImageSelect(event: any): void {
+  handleGalleryImageSelect(event: any): any {
     const selectedFile = event.target.files[0];
-
+    
     if (selectedFile) {
-      // Ovde možete obraditi izabranu sliku (npr. prikazati je ili poslati na server)
+      this.selectedImage=selectedFile;
       console.log('Izabrana slika iz galerije:', selectedFile);
     }
   }

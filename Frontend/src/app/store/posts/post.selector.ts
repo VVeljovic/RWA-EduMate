@@ -9,3 +9,7 @@ export const selectPosts = createSelector(
   selectPostState,
   (state: PostState) => state.posts
 );
+export const selectPostImages = createSelector(
+  selectPostState,
+  (state: PostState) => state.postImages
+);

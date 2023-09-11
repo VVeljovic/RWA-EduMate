@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
            
             const objectURL = URL.createObjectURL(blobData);
             this.imagePath = objectURL;
+            console.log(this.imagePath);
           },
           (error) => {
             console.error('Došlo je do greške prilikom preuzimanja slike.', error);

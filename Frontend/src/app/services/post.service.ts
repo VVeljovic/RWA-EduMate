@@ -33,6 +33,15 @@ export class PostService {
     // );
     return this.http.post<Post>(environment.api + "post", { body }, { headers });
   }
+  getPostImage(imageName:string){
+    const requestOptions: Object = { responseType: 'blob' };
+    return this.http.get<Blob>(`${environment.api}post/post-image/${imageName}`, requestOptions);
+  }
+  uploadImage(id:number,file:File):Observable<any>{
+    const formData = new FormData();
+    formData.append('file',file);
+    return this.http.post(`${environment.api}post/uploadImage/${id}`,formData);
+  }
   }
   
   

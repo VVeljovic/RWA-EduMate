@@ -3,12 +3,14 @@ import * as fromPostActions from "./post.actions";
 import { Post } from "src/app/models/post.model";
 export interface PostState {
   posts: Post[];
+  postImages: { [imageName: string]: Blob };
   loading: boolean;
   error: any;
 }
 
 export const initialState: PostState = {
   posts: [],
+  postImages: {},
   loading: false,
   error: null,
 };
@@ -30,5 +32,9 @@ export const postReducer = createReducer(
   on(fromPostActions.createPost, (state, { post }) => ({
     ...state,
     posts: [...state.posts,  post ],
+  })),
+  on(fromPostActions.loadPostImageSuccess, (state, { imageName, imageBlob }) => ({
+    ...state,
+    postImages: { ...state.postImages, [imageName]: imageBlob },
   }))
 );

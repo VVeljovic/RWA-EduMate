@@ -7,4 +7,16 @@ export const loadPostsFailure = createAction('[Post] Load Posts Failure', props<
 export const createPost = createAction('[Post] Create Post', props<{ post: Post}>());
 export const createPostSuccess = createAction('[Post] Create Post Success', props<{ post: Post }>());
 export const createPostFailure = createAction('[Post] Create Post Failure', props<{ error: any }>());
+export const loadPostImage = createAction(
+    '[Post] Load Post Image',
+    props<{ imageName: string }>()
+  );
+  export const loadPostImageSuccess = createAction(
+    '[Post] Load Post Image Success',
+    props<{ imageName: string, imageBlob: Blob }>()
+  );
+  export const loadPostImageFailure = createAction(
+    '[Post] Load Post Image Failure',
+    props<{ imageName: string, error: any }>()
+  );
 

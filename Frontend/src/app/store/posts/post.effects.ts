@@ -31,4 +31,15 @@ export class PostEffects {
     )
   )
 );
+loadPostImage$ = createEffect(() =>
+this.actions$.pipe(
+  ofType(fromPostActions.loadPostImage),
+  switchMap(({ imageName }) =>
+    this.postService.getPostImage(imageName).pipe(
+      map((imageBlob) => fromPostActions.loadPostImageSuccess({ imageName, imageBlob })),
+      catchError((error) => of(fromPostActions.loadPostImageFailure({ imageName, error })))
+    )
+  )
+)
+);
 }

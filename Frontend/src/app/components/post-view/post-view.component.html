@@ -1,4 +1,3 @@
-
 <div class="tweet-wrap" *ngFor="let post of post$ | async">
     <div class="tweet-header">
       <img src="https://pbs.twimg.com/profile_images/1012717264108318722/9lP-d2yM_400x400.jpg" alt="" class="avator">
@@ -11,7 +10,7 @@
       
     </div>
     <div class="tweet-img-wrap">
-      <img src="https://pbs.twimg.com/media/Dgti2h0WkAEUPmT.png" alt="" class="tweet-img">
+      <img [src]="images[post.id]" alt="" class="tweet-img">
     </div>
     <div class="tweet-info-counts">
       

@@ -1,10 +1,17 @@
-import { Controller, Post, Body, Get, Put, Param, Delete,Request} from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Param, Delete,Request,UploadedFile,UseInterceptors, Res, NotFoundException} from '@nestjs/common';
 import { PostService } from '../services/post.service';
 import { IPost } from '../models/post.interface';
-import {Observable}from 'rxjs';
+import {Observable, map, switchMap}from 'rxjs';
 import {UpdateResult, DeleteResult}from 'typeorm';
 import { JwtAuthGuard } from 'src/auth/jwtStrategy/jwt-auth.guard';
 import { UseGuards } from '@nestjs/common/decorators';
+import {v4 as uuidv4}from 'uuid';
+import path = require('path');
+import { join } from 'path';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { storage } from 'src/user/controllers/user.controller';
+import { of } from 'rxjs';
 @Controller('post')
 export class PostController {
 
@@ -55,4 +62,25 @@ export class PostController {
    console.log(course);
    return(this.postService.getFilteredPosts(course,year));
  }
+ @Post('uploadImage/:id')
+ @UseInterceptors(FileInterceptor('file', storage))
+ uploadFile(@UploadedFile() file, @Param('id') id): Observable<Object> {
+   return this.postService.findPostById(id).pipe(
+     switchMap((post: IPost) => {
+       if (!post) {
+         throw new NotFoundException(`Post with id ${id} not found`);
+       }
+ 
+       post.image = file.filename;
+       return this.postService.updatePost(id, post).pipe(
+         map(() => ({ imagePath: file.filename }))
+       );
+     })
+   );
+ }
+ 
+   @Get('post-image/:imagename')
+   findProfileImage(@Param('imagename')imagename,@Res()res):Observable<Object>{
+    return of(res.sendFile(join(process.cwd(),'uploads/profileimages/'+imagename)));
+   }
 }
