@@ -1,0 +1,30 @@
+$color_1: #333;
+$background-color_1: transparent;
+
+.filterable {
+	margin-top: 15px;
+	.panel-heading {
+		.pull-right {
+			margin-top: -20px;
+		}
+	}
+	.filters {
+		input[disabled] {
+			background-color: $background-color_1;
+			border: none;
+			cursor: auto;
+			box-shadow: none;
+			padding: 0;
+			height: auto;
+			&::-webkit-input-placeholder {
+				color: $color_1;
+			}
+			&::-moz-placeholder {
+				color: $color_1;
+			}
+			&:-ms-input-placeholder {
+				color: $color_1;
+			}
+		}
+	}
+}

@@ -59,7 +59,6 @@ export class PostController {
    @Get('getFilteredPosts/:course?/:year?')
  getFilteredPosts(@Param('course')course?:string,@Param('year')year?:number):Observable<IPost[]>
  {
-   console.log(course);
    return(this.postService.getFilteredPosts(course,year));
  }
  @Post('uploadImage/:id')

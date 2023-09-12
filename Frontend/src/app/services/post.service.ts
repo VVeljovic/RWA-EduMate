@@ -12,8 +12,25 @@ import { HttpHeaders } from '@angular/common/http';
 export class PostService {
   constructor(private http: HttpClient,private store:Store) {}
   authToken$ = this.store.select(selectAuthToken);
-  public getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(environment.api + "post");
+  public getPosts(course?:string,year?:number): Observable<Post[]> {
+    console.log('pozvan servis'+course+year);
+    let url = environment.api + "post/getFilteredPosts";
+
+    // Dodaj course u URL ako je definisan
+    if (course !== undefined) {
+      url += `/${course}`;
+    }
+  
+    // Dodaj year u URL ako je definisan
+    if (year !== undefined) {
+      url += `/${year}`;
+    }
+    this.http.get<Post[]>(url).subscribe(response=>{
+      console.log(response);
+    })
+    console.log(url);
+    return this.http.get<Post[]>(url);
+
   }
   public createPost(body:string):Observable<Post>{
     let jwtToken :any;

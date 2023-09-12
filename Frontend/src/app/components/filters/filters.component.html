@@ -1,0 +1,84 @@
+
+
+<div class="container">
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr class="filters">
+          <th>
+            Course
+            <select id="assigned-user-filter" class="form-control"  [(ngModel)]="selectedCourse">
+              <option>RII</option>
+              <option>EKM</option>
+              <option>UPS</option>
+              <option>EK</option>
+              <option>EN</option>
+              <option>/</option>
+            </select>
+          </th>
+        </tr>
+        <tr class="filters">
+          <th>
+            Year
+            <select id="status-filter" class="form-control"[(ngModel)]="selectedYear">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+            </select>
+          </th>
+        </tr>
+        <tr class="filters">
+          <th>
+            Milestone
+            <select id="milestone-filter" class="form-control">
+              <option>None</option>
+              <option>Milestone 1</option>
+              <option>Milestone 2</option>
+              <option>Milestone 3</option>
+            </select>
+          </th>
+        </tr>
+        <tr class="filters">
+          <th>
+            Priority
+            <select id="priority-filter" class="form-control">
+              <option>Any</option>
+              <option>Low</option>
+              <option>Medium</option>
+              <option>High</option>
+              <option>Urgent</option>
+            </select>
+          </th>
+        </tr>
+        <tr class="filters">
+          <th>
+            Tags
+            <select id="tags-filter" class="form-control">
+              <option>None</option>
+              <option>Tag 1</option>
+              <option>Tag 2</option>
+              <option>Tag 3</option>
+            </select>
+          </th>
+        </tr>
+        <tr>
+          <th></th>
+        </tr>
+        <tr>
+          <th>
+            <span class="input-group-text border-0 d-none d-lg-flex" (click)="showSelectedOptions()">
+              <i class="fas fa-search"></i>
+            </span>
+          </th>
+        </tr>
+      </thead>
+    </table>
+    <div class="panel panel-primary filterable">
+      <div class="panel-heading">
+        <h3 class="panel-title"></h3>
+        <div class="pull-right"></div>
+      </div>
+    </div>
+  </div>
+</div>

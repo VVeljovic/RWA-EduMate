@@ -36,5 +36,17 @@ export const postReducer = createReducer(
   on(fromPostActions.loadPostImageSuccess, (state, { imageName, imageBlob }) => ({
     ...state,
     postImages: { ...state.postImages, [imageName]: imageBlob },
-  }))
+  })),
+  on(fromPostActions.loadFilteredPosts, (state) => ({ ...state, loading: true })),
+  on(fromPostActions.loadFilteredPostsSuccess, (state, { posts }) => ({
+    ...state,
+    posts,
+    loading: false,
+    error: null,
+  })),
+  on(fromPostActions.loadFilteredPostsFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
 );
