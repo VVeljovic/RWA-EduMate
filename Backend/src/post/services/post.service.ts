@@ -41,5 +41,17 @@ export class PostService {
         findPostById(id:number):Observable<IPost>{
             return from(this.postRepository.findOne({ where: { id } }));
         }
-
+        findLastOnePost(user:IUser):Observable<IPost>{
+            const username:string = user.username;
+            console.log(user);
+            console.log(username);
+            return from(
+                this.postRepository
+                    .createQueryBuilder('post')
+                    .innerJoinAndSelect('post.author', 'author')
+                    .where('author.username = :username', { username })
+                    .orderBy('post.createdAt', 'DESC') // Sortiranje po createdAt opadajuće
+                    .getOne()
+            );
+        }
 }

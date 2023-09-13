@@ -61,17 +61,24 @@ export class PostController {
  {
    return(this.postService.getFilteredPosts(course,year));
  }
- @Post('uploadImage/:id')
+ @UseGuards(JwtAuthGuard)
+ @Get('getLastPostOfUser')
+ getlastPost(@Request()req):Observable<IPost>
+ {
+  return(this.postService.findLastOnePost(req.user));
+ }
+ @UseGuards(JwtAuthGuard)
+ @Post('uploadImage')
  @UseInterceptors(FileInterceptor('file', storage))
- uploadFile(@UploadedFile() file, @Param('id') id): Observable<Object> {
-   return this.postService.findPostById(id).pipe(
+ uploadFile(@UploadedFile() file,@Request()req): Observable<Object> {
+   return this.postService.findLastOnePost(req.user).pipe(
      switchMap((post: IPost) => {
        if (!post) {
-         throw new NotFoundException(`Post with id ${id} not found`);
+         throw new NotFoundException(`Post not found`);
        }
  
        post.image = file.filename;
-       return this.postService.updatePost(id, post).pipe(
+       return this.postService.updatePost(post.id, post).pipe(
          map(() => ({ imagePath: file.filename }))
        );
      })

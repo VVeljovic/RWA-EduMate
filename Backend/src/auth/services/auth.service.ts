@@ -33,7 +33,8 @@ export class AuthService {
                 year:user.year,
                 course:user.course,
                 sub: user.id,
-                image:user.image
+                image:user.image,
+                username:user.username
             })
         };
     }

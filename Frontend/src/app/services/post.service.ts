@@ -40,24 +40,24 @@ export class PostService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${jwtToken}`,
     });
-    // return this.http.post(environment.api+"post", {body}, { headers }).subscribe(
-    //   (response) => {
-    //     console.log('Uspešno kreiran post:', response);
-    //   },
-    //   (error) => {
-    //     console.error('Greška pri kreiranju posta:', error);
-    //   }
-    // );
     return this.http.post<Post>(environment.api + "post", { body }, { headers });
   }
   getPostImage(imageName:string){
     const requestOptions: Object = { responseType: 'blob' };
     return this.http.get<Blob>(`${environment.api}post/post-image/${imageName}`, requestOptions);
   }
-  uploadImage(id:number,file:File):Observable<any>{
+  uploadImage(file:File):Observable<any>{
+    let jwtToken :any;
+    this.authToken$.subscribe((authToken) => {
+      jwtToken = authToken?.access_token;
+    });    
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${jwtToken}`,
+    });
     const formData = new FormData();
     formData.append('file',file);
-    return this.http.post(`${environment.api}post/uploadImage/${id}`,formData);
+    console.log('pozvanServisSlike');
+    return this.http.post(`${environment.api}post/uploadImage/`,formData,{headers});
   }
   }
   

@@ -40,7 +40,8 @@ export class CreatePostComponent implements OnInit{
         console.log('Nema dostupnih korisnika.');
       }
     });
-    
+    if(this.selectedImage!=null)
+       {this.store.dispatch(PostActions.uploadPostImage({image:this.selectedImage})); this.selectedImage=null;}
   
   }
   handleGalleryImageSelect(event: any): any {

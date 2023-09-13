@@ -22,7 +22,8 @@ async validate(payload:any)
     surname:payload.surname,
     year:payload.year,
     course:payload.course,
-    image:payload.image
+    image:payload.image,
+    username:payload.username
    }
 }
 }

@@ -42,6 +42,17 @@ this.actions$.pipe(
   )
 )
 );
+uploadPostImage$ = createEffect(() =>
+this.actions$.pipe(
+  ofType(fromPostActions.uploadPostImage),
+  switchMap(({ image }) =>
+    this.postService.uploadImage(image).pipe(
+      map((response) => fromPostActions.uploadPostImageSuccess({ imageName:response })),
+      catchError((error) => of(fromPostActions.uploadPostImageFailure({ error })))
+    )
+  )
+)
+);
 loadFilteredPosts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromPostActions.loadFilteredPosts),
