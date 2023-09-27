@@ -52,11 +52,11 @@ export class PostViewComponent implements OnInit, OnChanges {
     this.dialogRef.open(CommentPopupComponent, { data: { postId } });
   }
 
-  // Promenili smo parametre funkcije da prihvata niz slika i niz postId-jeva
+  
   getAndDispatchPostImages(imageNames: string[], postIds: number[]) {
     console.log(imageNames.length);
   
-    // Create an observable sequence from the imageNames array
+    
     const imageNames$ = from(imageNames);
   
     imageNames$
@@ -66,7 +66,7 @@ export class PostViewComponent implements OnInit, OnChanges {
           this.store.dispatch(loadPostImage({ imageName }));
   
           return this.postImages$.pipe(
-            filter(imageData => !!imageData[imageName]), // Wait until the image is loaded
+            filter(imageData => !!imageData[imageName]), 
             take(1),
             map(imageData => ({ blobData: imageData[imageName], postId }))
           );
@@ -87,6 +87,7 @@ export class PostViewComponent implements OnInit, OnChanges {
     const filters: Filters = this.selectedFilters;
     console.log(filters);
     if (filters) this.store.dispatch(loadFilteredPosts({ selectedFilters: filters }));
+    
   }
 
   showSelectedFilters() {

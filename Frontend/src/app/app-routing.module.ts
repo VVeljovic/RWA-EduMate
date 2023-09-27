@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FrontPageComponent } from './front-page/front-page.component';
 import { CommentPopupComponent } from './components/comment-popup/comment-popup.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { PaymentCardComponent } from './components/payment-card/payment-card.component';
 
 const routes: Routes = [
 { path:'',component:FrontPageComponent,},
@@ -13,7 +14,8 @@ const routes: Routes = [
 {path:'signUp',component:LoginCardComponent},
 {path:'user/:userId',component:UserInfoComponent},
 {path:'comments',component:CommentPopupComponent},
-{path:'chat/connections',component:ChatComponent}
+{path:'chat/connections',component:ChatComponent},
+{path:'payment',component:PaymentCardComponent}
 
 ];
 

@@ -25,6 +25,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { SocketIoConfig,SocketIoModule } from 'ngx-socket-io';
 import { ChatService } from './services/chat.service';
 import { FiltersComponent } from './components/filters/filters.component';
+import { PaymentCardComponent } from './components/payment-card/payment-card.component';
 const config:SocketIoConfig = {url: 'http://localhost:3000',options:{}};
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ const config:SocketIoConfig = {url: 'http://localhost:3000',options:{}};
     FrontPageComponent,
     CommentPopupComponent,
     ChatComponent,
-    FiltersComponent
+    FiltersComponent,
+    PaymentCardComponent
   ],
   imports: [
     BrowserModule,
