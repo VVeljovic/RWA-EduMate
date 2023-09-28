@@ -12,18 +12,22 @@ import { HttpHeaders } from '@angular/common/http';
 export class PostService {
   constructor(private http: HttpClient,private store:Store) {}
   authToken$ = this.store.select(selectAuthToken);
-  public getPosts(course?:string,year?:number): Observable<Post[]> {
+  public getPosts(course?:string,year?:number,sort?:string): Observable<Post[]> {
     console.log('pozvan servis'+course+year);
     let url = environment.api + "post/getFilteredPosts";
 
-    // Dodaj course u URL ako je definisan
-    if (course !== undefined) {
+console.log(course);
+    if (course !== undefined && course !='') {
       url += `/${course}`;
     }
   
     // Dodaj year u URL ako je definisan
-    if (year !== undefined) {
+    if (year !== undefined && year !==-1) {
       url += `/${year}`;
+    }
+    if (sort !== undefined && sort !=='') {
+      url += `/${sort}`;
+      console.log(url);
     }
     this.http.get<Post[]>(url).subscribe(response=>{
       console.log(response);

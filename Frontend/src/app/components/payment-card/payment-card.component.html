@@ -15,7 +15,7 @@
             </div>
             <h2 class="container__h1 container__h1--h2">Card Number</h2>
             <h3 class="container__h3">
-              <div class="card-number">
+              <div class="card-number" #cardElement>
                 <span class="card__span">{{cardNumber}}</span>
               </div>                               
             </h3>
@@ -47,7 +47,7 @@
 
         <form class="card-form" (ngSubmit)="onSubmit()" #paymentForm="ngForm">
           <div  class="field">
-            <div  id="card-element"></div>
+            
             <svg version="1.1" class="card-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
               <g transform="translate(1 1)">
                 <path style="fill:#f4f5f9;" d="M475.16,434.2H34.84c-15.36,0-27.307-11.947-27.307-27.307V103.107
@@ -90,6 +90,7 @@
               </g>
             </svg>
             <input
+             
   id="card-number"
   class="field__input"
   type="tel"
@@ -262,8 +263,8 @@
             (input)="onCvcNumberInput()"/>
           </div>
          
-           
-            <div #cardElement></div>
+          <div id="card-element"></div>
+            
           <button class="button" type="submit">Submit</button>
         </form>
       </div>

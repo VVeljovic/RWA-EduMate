@@ -6,13 +6,15 @@ import { Component, Output,EventEmitter} from '@angular/core';
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent {
-  selectedCourse: string = 'None';
+  selectedCourse: string ='';
   selectedYear:number=-1;
-  @Output() filtersSelected: EventEmitter<{ course: string, year: number }> = new EventEmitter();  showSelectedOptions()
+  selectedDirection:string = '';
+  @Output() filtersSelected: EventEmitter<{ course: string, year: number,sort:string }> = new EventEmitter();  showSelectedOptions()
   {
     const selectedFilters = {
       course:this.selectedCourse,
-      year:this.selectedYear
+      year:this.selectedYear,
+      sort:this.selectedDirection
     }
     this.filtersSelected.emit(selectedFilters);
   }

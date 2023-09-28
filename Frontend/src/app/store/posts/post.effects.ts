@@ -57,7 +57,7 @@ loadFilteredPosts$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fromPostActions.loadFilteredPosts),
       switchMap(({selectedFilters}) =>
-        this.postService.getPosts(selectedFilters.course,selectedFilters.year).pipe(
+        this.postService.getPosts(selectedFilters.course,selectedFilters.year,selectedFilters.sort).pipe(
           map((posts) => fromPostActions.loadPostsSuccess({ posts })),
           catchError((error) => of(fromPostActions.loadPostsFailure({ error })))
         )

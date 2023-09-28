@@ -56,10 +56,11 @@ export class PostController {
       
       return(this.postService.findPostsFromUser(idUser));
    }
-   @Get('getFilteredPosts/:course?/:year?')
- getFilteredPosts(@Param('course')course?:string,@Param('year')year?:number):Observable<IPost[]>
+   @Get('getFilteredPosts/:course?/:year?/:sort?')
+ getFilteredPosts(@Param('course')course?:string,@Param('year')year?:string,@Param('sort')sort?:string):Observable<IPost[]>
  {
-   return(this.postService.getFilteredPosts(course,year));
+  console.log(course,year,sort);
+   return(this.postService.getFilteredPosts(course,year,sort));
  }
  @UseGuards(JwtAuthGuard)
  @Get('getLastPostOfUser')

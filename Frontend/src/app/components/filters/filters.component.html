@@ -13,7 +13,7 @@
               <option>UPS</option>
               <option>EK</option>
               <option>EN</option>
-              <option>/</option>
+              <option></option>
             </select>
           </th>
         </tr>
@@ -30,12 +30,11 @@
         </tr>
         <tr class="filters">
           <th>
-            Milestone
-            <select id="milestone-filter" class="form-control">
+            Sort
+            <select id="milestone-filter" class="form-control"[(ngModel)]="selectedDirection">
               <option>None</option>
-              <option>Milestone 1</option>
-              <option>Milestone 2</option>
-              <option>Milestone 3</option>
+              <option>ASC</option>
+              <option>DESC</option>
             </select>
           </th>
         </tr>

@@ -16,7 +16,7 @@ export class PaymentCardComponent {
   yearNumber : string = ''
   mounthNumber : string = ''
   cvc: string = '';
-  @ViewChild('cardElement') cardElement!: ElementRef;
+
 
   constructor(private service: PaymentService) {
     this.stripePromise = loadStripe(STRIPE_PUBLISH_KEY);
@@ -24,7 +24,7 @@ export class PaymentCardComponent {
 
   onCardNumberInput() {
     this.cardNumber = this.cardNumber.replace(/\s/g, '');
-    this.cardNumber = this.cardNumber.replace(/(\d{4})/g, '$1 ');
+   // this.cardNumber = this.cardNumber.replace(/(\d{4})/g, '$1 ');
   }
 
   onCvcNumberInput() {
@@ -54,14 +54,15 @@ export class PaymentCardComponent {
     console.log(clientSecret);
     const stripe = await this.stripePromise;
     if (stripe) {
+
       const elements = stripe.elements();
       const cardElement = elements.create('card');
-      cardElement.mount(this.cardElement.nativeElement);
-      console.log(this.cardElement.nativeElement);
-      console.log(cardElement);
+    
+      cardElement.mount('#card-element');
+     
       const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
-          card: cardElement // Ovde treba da postavite referencu na vaš input element za unos kartičnih podataka
+          card: cardElement,
         },
       });
 

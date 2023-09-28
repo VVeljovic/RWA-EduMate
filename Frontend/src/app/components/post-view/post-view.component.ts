@@ -20,7 +20,8 @@ export class PostViewComponent implements OnInit, OnChanges {
   public post$: Observable<Post[]>;
   public postImages$: Observable<{ [imageName: string]: Blob }>;
   public images: string[] = [];
-  @Input() selectedFilters!: { course: string; year: number };
+  selectedImage: string | ArrayBuffer | null = null;
+  @Input() selectedFilters!: { course: string; year: number,sort:string};
 
   constructor(private store: Store<{ posts: Post[]; postImages: { [imageName: string]: Blob } }>, private dialogRef: MatDialog) {
     this.post$ = this.store.select(selectPosts);
@@ -92,5 +93,16 @@ export class PostViewComponent implements OnInit, OnChanges {
 
   showSelectedFilters() {
     console.log('Selected Filters:', this.selectedFilters);
+  }
+ 
+  
+  previewImage(file: File): void {
+    console.log('USOOOOOOOOOOOOOOOO');
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+  
+    reader.onload = () => {
+      this.selectedImage = reader.result;
+    };
   }
 }

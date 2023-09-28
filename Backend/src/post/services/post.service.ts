@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PostEntity } from '../models/post.entity';
-import {Repository,UpdateResult,DeleteResult} from 'typeorm';
+import {Repository,UpdateResult,DeleteResult, OrderByCondition} from 'typeorm';
 import {InjectRepository} from '@nestjs/typeorm'
 import { IPost } from '../models/post.interface';
 import {Observable,from} from 'rxjs';
@@ -31,13 +31,23 @@ export class PostService {
                 where:{author:{id:userId}}
             }))
         }
-        getFilteredPosts(course:string,year:number):Observable<IPost[]>{
-            return from(this.postRepository.createQueryBuilder('post')
-            .innerJoinAndSelect('post.author', 'author') 
-            .where(course!=undefined ? 'author.course = :course' : '1 = 1', { course })
-            .andWhere(year!=undefined? 'author.year=:year':'1=1',{year})
-            .getMany())
-        }
+        getFilteredPosts(course: string, year: string, sort: string): Observable<IPost[]> {
+            let orderBy: OrderByCondition = { 'post.createdAt': 'DESC' }; 
+            
+            if (sort !==undefined&& sort === 'ASC') {
+              orderBy = { 'post.createdAt': 'ASC' }; 
+            } else if (sort !== undefined &&sort === 'DESC') {
+              orderBy = { 'post.createdAt': 'DESC' }; 
+            }
+          
+            const queryBuilder = this.postRepository.createQueryBuilder('post')
+              .innerJoinAndSelect('post.author', 'author')
+              .orderBy(orderBy)
+              .where(course !== undefined ? 'author.course = :course' : '1 = 1', { course })
+              .andWhere(year !== undefined ? 'author.year = :year' : '1 = 1', { year });
+          
+            return from(queryBuilder.getMany());
+          }
         findPostById(id:number):Observable<IPost>{
             return from(this.postRepository.findOne({ where: { id } }));
         }
