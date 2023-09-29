@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards,Request, UploadedFile, UseInterceptors, Param, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards,Request, UploadedFile, UseInterceptors, Param, Res, Put } from '@nestjs/common';
 import { UserService } from '../services/user.service';
 import { IUser } from '../models/user.interface';
 import { LocalAuthGuard } from 'src/auth/localStrategy/local-auth.guard';
@@ -58,5 +58,10 @@ return req.user;
    @Get('profile-image/:imagename')
    findProfileImage(@Param('imagename')imagename,@Res()res):Observable<Object>{
     return of(res.sendFile(join(process.cwd(),'uploads/profileimages/'+imagename)));
+   }
+   @UseGuards(JwtAuthGuard)
+   @Put('updateUserRole')
+   updateUserRole(@Request()req):Observable<IUser>{
+    return this.userService.updateUserRole(req.user);
    }
 }

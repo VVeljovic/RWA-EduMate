@@ -1,11 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PostEntity } from '../models/post.entity';
-import {Repository,UpdateResult,DeleteResult, OrderByCondition} from 'typeorm';
+import {Repository,UpdateResult,DeleteResult, OrderByCondition, MoreThan} from 'typeorm';
 import {InjectRepository} from '@nestjs/typeorm'
 import { IPost } from '../models/post.interface';
-import {Observable,from} from 'rxjs';
+import {NotFoundError, Observable,from} from 'rxjs';
 import { IUser } from 'src/user/models/user.interface';
 import { IComment } from 'src/comments/models/comment.interface';
+import { Role } from '../models/role.enum';
 
 @Injectable()
 export class PostService {
@@ -63,5 +64,27 @@ export class PostService {
                     .orderBy('post.createdAt', 'DESC') // Sortiranje po createdAt opadajuće
                     .getOne()
             );
+        }
+        createPost2(user:IUser,post:IPost):Observable<IPost>{
+            const currentDate = new Date();
+            const twentyFourHoursAgo = new Date();
+            twentyFourHoursAgo.setDate(currentDate.getDate()-1);
+            if(user.role===Role.USER){
+                return from(
+                    this.postRepository.findOne({
+                        where:{
+                            author:user,
+                            createdAt:MoreThan(twentyFourHoursAgo),
+                        }
+                    }).then(existingPost=>{
+                        if(existingPost)
+                        {throw new NotFoundException('User can create just one post!');}
+                        post.author=user;
+                        return this.postRepository.save(post);
+                    })
+                );
+            }
+            post.author=user;
+            return from(this.postRepository.save(post));
         }
 }

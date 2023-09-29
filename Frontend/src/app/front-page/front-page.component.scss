@@ -2,7 +2,7 @@
   .content-wrapper {
     display: flex;
     flex: 1; 
-    max-width: 1200px; 
+    max-width: 1900px; 
     width: 100%; 
     padding: 20px; 
   }
@@ -16,4 +16,7 @@
     flex: 3; 
     padding: 40px; 
   }
-  
+  .right-sidebar {
+    flex: 2; 
+    padding: 20px; 
+  }

@@ -22,11 +22,11 @@ export class PostController {
     {
 
     }
-    @Roles(Role.PREMIUM)
+    @Roles(Role.PREMIUM,Role.USER)
     @UseGuards(JwtAuthGuard,RolesGuard)
  @Post()
  createPost(@Body() post:IPost, @Request()req){
-     return this.postService.createPost(req.user,post);
+     return this.postService.createPost2(req.user,post);
  }
  @Get()
  findAll():Observable<IPost[]>

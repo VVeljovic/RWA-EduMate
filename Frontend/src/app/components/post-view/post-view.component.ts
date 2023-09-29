@@ -97,7 +97,6 @@ export class PostViewComponent implements OnInit, OnChanges {
  
   
   previewImage(file: File): void {
-    console.log('USOOOOOOOOOOOOOOOO');
     const reader = new FileReader();
     reader.readAsDataURL(file);
   

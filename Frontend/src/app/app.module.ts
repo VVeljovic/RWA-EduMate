@@ -26,6 +26,7 @@ import { SocketIoConfig,SocketIoModule } from 'ngx-socket-io';
 import { ChatService } from './services/chat.service';
 import { FiltersComponent } from './components/filters/filters.component';
 import { PaymentCardComponent } from './components/payment-card/payment-card.component';
+import { NotificationPopupComponent } from './components/notification-popup/notification-popup.component';
 const config:SocketIoConfig = {url: 'http://localhost:3000',options:{}};
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ const config:SocketIoConfig = {url: 'http://localhost:3000',options:{}};
     CommentPopupComponent,
     ChatComponent,
     FiltersComponent,
-    PaymentCardComponent
+    PaymentCardComponent,
+    NotificationPopupComponent
   ],
   imports: [
     BrowserModule,

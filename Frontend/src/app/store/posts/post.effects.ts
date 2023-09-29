@@ -5,9 +5,12 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { PostService } from '../../services/post.service';
 import * as fromPostActions from './post.actions';
 import { Post } from 'src/app/models/post.model';
+import { MatDialog } from '@angular/material/dialog';
+import { NotificationPopupComponent } from 'src/app/components/notification-popup/notification-popup.component';
+import { CommentPopupComponent } from 'src/app/components/comment-popup/comment-popup.component';
 @Injectable()
 export class PostEffects {
-  constructor(private actions$: Actions, private postService: PostService) {}
+  constructor(private actions$: Actions, private postService: PostService,private dialog:MatDialog) {}
 
   loadPosts$ = createEffect(() =>
     this.actions$.pipe(
@@ -25,8 +28,18 @@ export class PostEffects {
     ofType(fromPostActions.createPost),
     switchMap(({ post }) =>
       this.postService.createPost(post.body).pipe(
-        map((response) => fromPostActions.createPostSuccess({ post:response })),
-        catchError((error) => of(fromPostActions.createPostFailure({ error })))
+        map((response) => {
+          console.log('Uspešno kreiranje posta', response);
+          return fromPostActions.createPostSuccess({ post: response });
+        }),
+        catchError((error) => {
+          console.error('Greška prilikom kreiranja posta', error);
+          this.dialog.open(NotificationPopupComponent, {
+            data: { title:'Become a Premium',
+                  text:'Regular users are allowed only one post per day. Become a premium member'},
+          });
+          return of(fromPostActions.createPostFailure({ error }));
+        })
       )
     )
   )

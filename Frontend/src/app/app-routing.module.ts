@@ -7,6 +7,7 @@ import { FrontPageComponent } from './front-page/front-page.component';
 import { CommentPopupComponent } from './components/comment-popup/comment-popup.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { PaymentCardComponent } from './components/payment-card/payment-card.component';
+import { NotificationPopupComponent } from './components/notification-popup/notification-popup.component';
 
 const routes: Routes = [
 { path:'',component:FrontPageComponent,},
@@ -15,7 +16,10 @@ const routes: Routes = [
 {path:'user',component:UserInfoComponent},
 {path:'comments',component:CommentPopupComponent},
 {path:'chat/connections',component:ChatComponent},
-{path:'payment',component:PaymentCardComponent}
+{path:'payment',component:PaymentCardComponent},
+{path:'popUp',component:NotificationPopupComponent},
+{path:'user',component:UserInfoComponent}
+
 
 ];
 

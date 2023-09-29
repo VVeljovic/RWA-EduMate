@@ -33,6 +33,10 @@ export const postReducer = createReducer(
     ...state,
     posts: [...state.posts,  post ],
   })),
+  on(fromPostActions.createPostFailure, (state, { error }) => ({
+    ...state,
+    error
+  })),
   on(fromPostActions.loadPostImageSuccess, (state, { imageName, imageBlob }) => ({
     ...state,
     postImages: { ...state.postImages, [imageName]: imageBlob },

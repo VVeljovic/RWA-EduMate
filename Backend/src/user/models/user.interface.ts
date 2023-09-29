@@ -1,4 +1,5 @@
 import { IPost } from "src/post/models/post.interface";
+import { Role } from "src/post/models/role.enum";
 
 export interface IUser {
     id?:number;
@@ -8,6 +9,7 @@ export interface IUser {
     course:string;
     year:number;
     password:string;
+    role?:Role;
     posts:IPost[];
     image?:string;
 }

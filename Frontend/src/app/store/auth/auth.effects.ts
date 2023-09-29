@@ -6,13 +6,15 @@ import * as AuthActions from './auth.actions';
 import { UserService } from '../../services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { NotificationPopupComponent } from 'src/app/components/notification-popup/notification-popup.component';
 
 @Injectable()
 export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: UserService,
-    private router : Router
+    private dialog:MatDialog
   ) {}
 
   login$ = createEffect(() =>
@@ -24,8 +26,10 @@ export class AuthEffects {
         catchError((error) => {
           if (error instanceof HttpErrorResponse) {
             if (error.status === 400 || error.status === 401) {
-              // Preusmeravanje na stranicu za registraciju (ili drugu stranicu po vašem izboru)
-              this.router.navigate(['/signUp']); // Promenite '/signup' na odgovarajuću putanju
+              this.dialog.open(NotificationPopupComponent, {
+                data: { title:'Invalid Credentials',
+                      text:'The username or password you entered is incorrect. Please check your credentials and try again.'},
+              });
             }
           }
           return of(AuthActions.loginFailure({ error }));
