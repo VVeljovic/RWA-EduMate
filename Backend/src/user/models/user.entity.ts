@@ -1,5 +1,6 @@
 import { CommentEntity } from "src/comments/models/comment.entity";
 import { PostEntity } from "src/post/models/post.entity";
+import { Role } from "src/post/models/role.enum";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('user')
@@ -20,6 +21,8 @@ export class UserEntity{
     image:string;
     @Column({default:''})
     password:string;
+    @Column({type:'enum',enum:Role,default:Role.USER})
+    role:Role;
     @OneToMany(()=>PostEntity,(postEntity)=>postEntity.author)
     posts:PostEntity[];
     @OneToMany(()=>CommentEntity,(commentEntity)=>commentEntity.author)

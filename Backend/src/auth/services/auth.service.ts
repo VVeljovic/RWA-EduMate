@@ -34,7 +34,8 @@ export class AuthService {
                 course:user.course,
                 sub: user.id,
                 image:user.image,
-                username:user.username
+                username:user.username,
+                role:user.role
             })
         };
     }

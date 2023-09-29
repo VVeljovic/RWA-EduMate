@@ -14,19 +14,19 @@ export class PostService {
   authToken$ = this.store.select(selectAuthToken);
   public getPosts(course?:string,year?:number,sort?:string): Observable<Post[]> {
     console.log('pozvan servis'+course+year);
-    let url = environment.api + "post/getFilteredPosts";
+    let url = environment.api + "post/getFilteredPosts/?";
 
 console.log(course);
     if (course !== undefined && course !='') {
-      url += `/${course}`;
+      url += `course=${course}`;
     }
   
     // Dodaj year u URL ako je definisan
     if (year !== undefined && year !==-1) {
-      url += `/${year}`;
+      url += `&year=${year}`;
     }
     if (sort !== undefined && sort !=='') {
-      url += `/${sort}`;
+      url += `&sort=${sort}`;
       console.log(url);
     }
     this.http.get<Post[]>(url).subscribe(response=>{

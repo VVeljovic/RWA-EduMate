@@ -4,7 +4,7 @@ import { IPost } from '../models/post.interface';
 import {Observable, map, switchMap}from 'rxjs';
 import {UpdateResult, DeleteResult}from 'typeorm';
 import { JwtAuthGuard } from 'src/auth/jwtStrategy/jwt-auth.guard';
-import { UseGuards } from '@nestjs/common/decorators';
+import { Query, UseGuards } from '@nestjs/common/decorators';
 import {v4 as uuidv4}from 'uuid';
 import path = require('path');
 import { join } from 'path';
@@ -12,6 +12,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { storage } from 'src/user/controllers/user.controller';
 import { of } from 'rxjs';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { Role } from '../models/role.enum';
+import { RolesGuard } from 'src/auth/roles.guard';
 @Controller('post')
 export class PostController {
 
@@ -19,7 +22,8 @@ export class PostController {
     {
 
     }
-    @UseGuards(JwtAuthGuard)
+    @Roles(Role.PREMIUM)
+    @UseGuards(JwtAuthGuard,RolesGuard)
  @Post()
  createPost(@Body() post:IPost, @Request()req){
      return this.postService.createPost(req.user,post);
@@ -57,7 +61,11 @@ export class PostController {
       return(this.postService.findPostsFromUser(idUser));
    }
    @Get('getFilteredPosts/:course?/:year?/:sort?')
- getFilteredPosts(@Param('course')course?:string,@Param('year')year?:string,@Param('sort')sort?:string):Observable<IPost[]>
+   getFilteredPosts(
+    @Query('course') course?: string,
+    @Query('year') year?: string,
+    @Query('sort') sort?: string,
+  ): Observable<IPost[]> 
  {
   console.log(course,year,sort);
    return(this.postService.getFilteredPosts(course,year,sort));

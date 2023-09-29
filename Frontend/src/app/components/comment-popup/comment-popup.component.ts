@@ -26,7 +26,7 @@ sendComment() {
 
   if (commentControl) {
     const commentText = commentControl.value;
-    console.log(commentText);
+    this.service.createComments(this.data.postId,commentText);
  
   }
 }
