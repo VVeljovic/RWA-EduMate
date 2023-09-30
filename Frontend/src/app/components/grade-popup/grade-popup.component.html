@@ -1,0 +1,35 @@
+<main>
+    <form>
+      <h1>Rate Post</h1>
+      <p>How was your experience using our application? Your rating matter!</p>
+  
+      <div class="rating">
+        <input type="radio" name="rating" id="rating-1" value="1" [(ngModel)]="selectedRating">
+        <input type="radio" name="rating" id="rating-2" value="2" [(ngModel)]="selectedRating">
+        <input type="radio" name="rating" id="rating-3" value="3" [(ngModel)]="selectedRating">
+        <input type="radio" name="rating" id="rating-4" value="4" [(ngModel)]="selectedRating">
+        <input type="radio" name="rating" id="rating-5" value="5" [(ngModel)]="selectedRating">
+  
+        <div class="rating__box">
+          <label for="rating-1" class="rating__star">&starf;</label>
+          <label for="rating-2" class="rating__star">&starf;</label>
+          <label for="rating-3" class="rating__star">&starf;</label>
+          <label for="rating-4" class="rating__star">&starf;</label>
+          <label for="rating-5" class="rating__star">&starf;</label>
+  
+        </div>
+      </div>
+<!--   
+      <div class="textarea-group">
+        <label>
+          <span>Comment : </span>
+          <textarea id="comment-rating" placeholder="Additional feedback ..." name="feedback"></textarea>
+        </label>
+      </div> -->
+  
+      <div class="action-group">
+        <input type="button" value="Submit" (click)="rate()">
+        <input type="reset" value="Cancel">
+      </div>
+    </form>
+  </main>

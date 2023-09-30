@@ -3,10 +3,11 @@ import { PostEntity } from '../models/post.entity';
 import {Repository,UpdateResult,DeleteResult, OrderByCondition, MoreThan} from 'typeorm';
 import {InjectRepository} from '@nestjs/typeorm'
 import { IPost } from '../models/post.interface';
-import {NotFoundError, Observable,from} from 'rxjs';
+import {NotFoundError, Observable,from, map} from 'rxjs';
 import { IUser } from 'src/user/models/user.interface';
 import { IComment } from 'src/comments/models/comment.interface';
 import { Role } from '../models/role.enum';
+import { MarksEntity } from 'src/marks/models/marks.entity';
 
 @Injectable()
 export class PostService {
@@ -32,20 +33,34 @@ export class PostService {
                 where:{author:{id:userId}}
             }))
         }
-        getFilteredPosts(course: string, year: string, sort: string): Observable<IPost[]> {
-            let orderBy: OrderByCondition = { 'post.createdAt': 'DESC' }; 
+        getFilteredPosts(course: string, year: string, sort: string, minMark: number, maxMark: number): Observable<IPost[]> {
+            let orderBy: OrderByCondition = { 'post.createdAt': 'DESC' };
             
-            if (sort !==undefined&& sort === 'ASC') {
-              orderBy = { 'post.createdAt': 'ASC' }; 
-            } else if (sort !== undefined &&sort === 'DESC') {
-              orderBy = { 'post.createdAt': 'DESC' }; 
+            if (sort !== undefined && sort === 'ASC') {
+              orderBy = { 'post.createdAt': 'ASC' };
+            } else if (sort !== undefined && sort === 'DESC') {
+              orderBy = { 'post.createdAt': 'DESC' };
             }
           
             const queryBuilder = this.postRepository.createQueryBuilder('post')
               .innerJoinAndSelect('post.author', 'author')
+              .leftJoinAndMapMany(
+                'post.marks',
+                MarksEntity,
+                'marks',
+                'marks.post = post.id',
+              )
               .orderBy(orderBy)
               .where(course !== undefined ? 'author.course = :course' : '1 = 1', { course })
               .andWhere(year !== undefined ? 'author.year = :year' : '1 = 1', { year });
+          
+            if (minMark !== undefined) {
+              queryBuilder.andWhere('marks.value >= :minMark', { minMark });
+              
+            } if( maxMark !== undefined)
+            {
+                queryBuilder.andWhere('marks.value <= :maxMark', { maxMark });
+            }
           
             return from(queryBuilder.getMany());
           }
@@ -87,4 +102,5 @@ export class PostService {
             post.author=user;
             return from(this.postRepository.save(post));
         }
-}
+       
+    }

@@ -8,6 +8,7 @@ import { CommentPopupComponent } from './components/comment-popup/comment-popup.
 import { ChatComponent } from './components/chat/chat.component';
 import { PaymentCardComponent } from './components/payment-card/payment-card.component';
 import { NotificationPopupComponent } from './components/notification-popup/notification-popup.component';
+import { GradePopupComponent } from './components/grade-popup/grade-popup.component';
 
 const routes: Routes = [
 { path:'',component:FrontPageComponent,},
@@ -17,7 +18,7 @@ const routes: Routes = [
 {path:'comments',component:CommentPopupComponent},
 {path:'chat/connections',component:ChatComponent},
 {path:'payment',component:PaymentCardComponent},
-{path:'popUp',component:NotificationPopupComponent},
+{path:'popUp',component:GradePopupComponent},
 {path:'user',component:UserInfoComponent}
 
 

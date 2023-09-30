@@ -11,6 +11,7 @@ import { CommentsController } from './comments/controllers/comments.controller';
 import { CommentModule } from './comments/comment.module';
 import { ChatModule } from './chat/chat.module';
 import { StripeModule } from './stripe/stripe.module';
+import { MarksModule } from './marks/marks.module';
 
 
 @Module({
@@ -26,7 +27,7 @@ import { StripeModule } from './stripe/stripe.module';
       autoLoadEntities:true,
       synchronize:true,
     }),
-    PostModule, UserModule,AuthModule,CommentModule, ChatModule, StripeModule
+    PostModule, UserModule,AuthModule,CommentModule, ChatModule, StripeModule, MarksModule
   ],
   controllers: [AppController],
   providers: [AppService],

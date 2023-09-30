@@ -60,15 +60,17 @@ export class PostController {
       
       return(this.postService.findPostsFromUser(idUser));
    }
-   @Get('getFilteredPosts/:course?/:year?/:sort?')
+   @Get('getFilteredPosts/:course?/:year?/:sort?/:minMark?/:maxMark?')
    getFilteredPosts(
     @Query('course') course?: string,
     @Query('year') year?: string,
     @Query('sort') sort?: string,
+    @Query('minMark') minMark?: number,
+    @Query('maxMark') maxMark?: number,
   ): Observable<IPost[]> 
  {
   console.log(course,year,sort);
-   return(this.postService.getFilteredPosts(course,year,sort));
+   return(this.postService.getFilteredPosts(course,year,sort,minMark,maxMark));
  }
  @UseGuards(JwtAuthGuard)
  @Get('getLastPostOfUser')
@@ -98,4 +100,5 @@ export class PostController {
    findProfileImage(@Param('imagename')imagename,@Res()res):Observable<Object>{
     return of(res.sendFile(join(process.cwd(),'uploads/profileimages/'+imagename)));
    }
+   
 }

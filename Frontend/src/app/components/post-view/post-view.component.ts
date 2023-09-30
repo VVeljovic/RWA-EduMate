@@ -10,6 +10,7 @@ import { CommentService } from 'src/app/services/comment.service';
 import { selectPostImages } from 'src/app/store/posts/post.selector';
 import { FiltersComponent } from '../filters/filters.component';
 import { Filters } from 'src/app/models/filters.model';
+import { GradePopupComponent } from '../grade-popup/grade-popup.component';
 
 @Component({
   selector: 'app-post-view',
@@ -21,7 +22,7 @@ export class PostViewComponent implements OnInit, OnChanges {
   public postImages$: Observable<{ [imageName: string]: Blob }>;
   public images: string[] = [];
   selectedImage: string | ArrayBuffer | null = null;
-  @Input() selectedFilters!: { course: string; year: number,sort:string};
+  @Input() selectedFilters!: { course: string; year: number,sort:string,minMark:number,maxMark:number};
 
   constructor(private store: Store<{ posts: Post[]; postImages: { [imageName: string]: Blob } }>, private dialogRef: MatDialog) {
     this.post$ = this.store.select(selectPosts);
@@ -38,21 +39,29 @@ export class PostViewComponent implements OnInit, OnChanges {
         if (post && post.image && !this.images[post.id]) {
           imagess.push(post.image);
           ids.push(post.id);
-          console.log(post);
+        //  console.log(post);
         }
       }
-      console.log(imagess);
-      this.getAndDispatchPostImages(imagess,ids);
+      //console.log(imagess);
+      const postsToLoadImages = posts.filter(post => post.image && !this.images[post.id]);
+
+      if (postsToLoadImages.length > 0) {
+        // Load images only for posts that haven't had their images loaded yet
+        this.getAndDispatchPostImages(imagess, ids);
+      }
     });
   }
 
   openDialog() {}
 
-  onPostClick(post: Post) {
+  onCommentPostClick(post: Post) {
     const postId = post.id;
     this.dialogRef.open(CommentPopupComponent, { data: { postId } });
   }
-
+  onGradePostClick(post:Post){
+    const postId= post.id;
+    this.dialogRef.open(GradePopupComponent,{data:{postId}})
+  }
   
   getAndDispatchPostImages(imageNames: string[], postIds: number[]) {
     console.log(imageNames.length);
@@ -81,7 +90,7 @@ export class PostViewComponent implements OnInit, OnChanges {
   processImageBlob(blobData: Blob, postId: number) {
     const objectURL = URL.createObjectURL(blobData);
     this.images[postId] = objectURL;
-    console.log(this.images);
+    //console.log(this.images);
   }
 
   ngOnChanges(changes: SimpleChanges) {

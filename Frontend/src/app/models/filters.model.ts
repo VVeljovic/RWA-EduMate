@@ -1,5 +1,7 @@
 export interface Filters{
     course?:string;
     year?:number;
-    sort?:string
+    sort?:string;
+    minMark?:number;
+    maxMark?:number;
 }
