@@ -3,10 +3,10 @@ import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 import * as fromPostActions from "./post.actions";
 import { Post } from "src/app/models/post.model";
 
-// Definišite entitetni adapter za postove
+
 export const postAdapter: EntityAdapter<Post> = createEntityAdapter<Post>();
 
-// Definišite interfejs za PostState sa EntityState<Post>
+
 export interface PostState extends EntityState<Post> {
   postImages: { [imageName: string]: Blob };
   loading: boolean;
