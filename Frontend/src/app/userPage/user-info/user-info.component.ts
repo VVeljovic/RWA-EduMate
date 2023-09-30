@@ -11,7 +11,7 @@ import { selectUser } from 'src/app/store/auth/auth.selector';
   styleUrls: ['./user-info.component.scss']
 })
 export class UserInfoComponent implements OnInit{
-  selectedSection:string = 'about';
+  activeSection:string = 'about';
   user$:Observable<User|null>|undefined;
   imagePath:string ='';
   constructor(private store:Store,private userService:UserService){}
@@ -29,8 +29,8 @@ export class UserInfoComponent implements OnInit{
       }
     })
   }
-  updateSelectedSection(section:string){
-    this.selectedSection=section;
-    console.log(this.selectedSection);
+  setActiveSection(section:string){
+    this.activeSection=section;
+    console.log(this.activeSection);
   }
 }

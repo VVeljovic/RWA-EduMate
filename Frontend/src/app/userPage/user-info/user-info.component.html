@@ -1,4 +1,4 @@
-<div class="card" data-state="#about" *ngIf="user$ | async as user">
+<div class="card"  *ngIf="user$ | async as user">
 
   <div class="card-header">
 
@@ -16,7 +16,7 @@
 
   <div class="card-main">
 
-    <div class="card-section is-active" id="about"*ngIf="selectedSection === 'about'">
+    <div [class]="activeSection === 'about' ? 'card-section is-active' : 'card-section'" id="about" *ngIf="activeSection === 'about'">
 
       <div class="card-content">
         <div class="card-subtitle">ABOUT</div>
@@ -49,7 +49,8 @@
       <button class="contact-me">WORK TOGETHER</button>
     </div>
 
-    <div class="card-section" id="experience"*ngIf="selectedSection === 'experience'">
+    <div [class]="activeSection === 'experience' ? 'card-section is-active' : 'card-section'" id="experience" *ngIf="activeSection === 'experience'">
+
 
       <div class="card-content">
 
@@ -95,8 +96,9 @@
 
     </div>
 
-    <div class="card-section" id="contact"*ngIf="selectedSection === 'contact'">
-      <p>a</p>
+    <div [class]="activeSection === 'contact' ? 'card-section is-active' : 'card-section'" id="contact" *ngIf="activeSection === 'contact'">
+
+      
       <div class="card-content">
 
         <div class="card-subtitle">CONTACT</div>
@@ -143,11 +145,11 @@
 
     <div class="card-buttons">
 
-      <button data-section="#about" class="is-active" (click)="updateSelectedSection('about')">ABOUT</button>
+      <button data-section="#about" class="is-active" (click)="setActiveSection('about')"[ngClass]="{'is-active': activeSection === 'about'}">ABOUT</button>
 
-      <button data-section="#experience"(click)="updateSelectedSection('experience')">EXPERIENCE</button>
+      <button data-section="#experience"(click)="setActiveSection('experience')" [ngClass]="{'is-active': activeSection === 'experience'}">EXPERIENCE</button>
 
-      <button data-section="#contact"(click)="updateSelectedSection('contact')">CONTACT</button>
+      <button data-section="#contact"(click)="setActiveSection('contact')"[ngClass]="{'is-active': activeSection === 'contact'}">CONTACT</button>
 
     </div>
 
