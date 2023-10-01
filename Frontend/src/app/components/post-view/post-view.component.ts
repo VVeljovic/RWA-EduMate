@@ -39,7 +39,7 @@ export class PostViewComponent implements OnInit, OnChanges {
         if (post && post.image && !this.images[post.id]) {
           imagess.push(post.image);
           ids.push(post.id);
-        //  console.log(post);
+          console.log(post);
         }
       }
       //console.log(imagess);
@@ -112,5 +112,15 @@ export class PostViewComponent implements OnInit, OnChanges {
     reader.onload = () => {
       this.selectedImage = reader.result;
     };
+  }
+  getStarArray(averageMark: number|undefined): boolean[] {
+    if(averageMark!=undefined)
+    {
+      const starArray: boolean[] = [];
+      for (let i = 0; i < 5; i++) {
+        starArray.push(i < Math.floor(averageMark));
+      }
+      return starArray; }
+    return[];
   }
 }

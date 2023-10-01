@@ -19,7 +19,7 @@ export class MarksController {
             switchMap((post:IPost)=>this.markService.rate(mark,post,req.user))
         );
     }
-    @Get('calculateAverageMarks/:id')
+    @Put('calculateAverageMarks/:id')
    calucalteAverageMarks(@Param('id')id:number):Observable<number>{
     return this.markService.calculateAverageMarkForPost(id);
    }

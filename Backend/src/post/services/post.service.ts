@@ -102,5 +102,17 @@ export class PostService {
             post.author=user;
             return from(this.postRepository.save(post));
         }
-       
+       incrementNumberOfMarks(postId:number):Observable<IPost>{
+        return from(this.postRepository.findOne({where:{id:postId}}).then((post:IPost)=>{
+            post.numberOfMarks=post.numberOfMarks+1;
+            return this.postRepository.save(post);
+        }))
+        
+       }
+       updateAverageMarks(postId:number,averageMark:number):Observable<IPost>{
+        return from(this.postRepository.findOne({where:{id:postId}}).then((post:IPost)=>{
+            post.averageMark=averageMark
+            return this.postRepository.save(post);
+        }))
     }
+}

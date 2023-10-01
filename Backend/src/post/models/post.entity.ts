@@ -15,6 +15,10 @@ export class PostEntity{
     image:string;
     @Column({default:()=>'CURRENT_TIMESTAMP'})
     createdAt:Date;
+    @Column({default: 0})
+    numberOfMarks:number;
+    @Column('double precision', { default: 0 })
+    averageMark:number;
     @ManyToOne(()=>UserEntity,(userEntity)=>userEntity.posts)
     author:UserEntity;
     @OneToMany(()=>CommentEntity,(commentEntity)=>commentEntity.post)
