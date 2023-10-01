@@ -6,6 +6,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Store } from '@ngrx/store';
 import { selectAuthToken } from 'src/app/store/auth/auth.selector';
+import { Chat } from '../models/chat.model';
 @Injectable()
 export class ChatService {
     constructor(private socket:Socket,private http:HttpClient,private store:Store)
@@ -31,4 +32,12 @@ export class ChatService {
       });
        return this.http.get<User[]>(`${environment.api}user/getUsersOnSameCourse`,{headers});
     }
+    getMessages(): Observable<Chat[]> {
+      // Slanje zahteva za učitavanje poruka
+      this.socket.emit('getMessages');
+  
+      // Pretplata na odgovor od servera
+      return this.socket.fromEvent<Chat[]>('allMessages');
+    }
+    
 }
