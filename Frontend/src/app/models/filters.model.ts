@@ -4,4 +4,5 @@ export interface Filters{
     sort?:string;
     minMark?:number;
     maxMark?:number;
+    sortMarks?:string;
 }

@@ -33,37 +33,55 @@ export class PostService {
                 where:{author:{id:userId}}
             }))
         }
-        getFilteredPosts(course: string, year: string, sort: string, minMark: number, maxMark: number): Observable<IPost[]> {
-            let orderBy: OrderByCondition = { 'post.createdAt': 'DESC' };
-            
-            if (sort !== undefined && sort === 'ASC') {
-              orderBy = { 'post.createdAt': 'ASC' };
-            } else if (sort !== undefined && sort === 'DESC') {
-              orderBy = { 'post.createdAt': 'DESC' };
+        getFilteredPosts(
+            course: string,
+            year: string,
+            sort: string,
+            minMark: number,
+            maxMark: number,
+            numberOfMarks: string
+          ): Observable<IPost[]> {
+            let orderBy: Record<string, 'ASC' | 'DESC'> = {};
+          
+            if (sort !== undefined && (sort === 'ASC' || sort === 'DESC')) {
+              orderBy['post.createdAt'] = sort;
             }
           
-            const queryBuilder = this.postRepository.createQueryBuilder('post')
+            if (
+              numberOfMarks !== undefined &&
+              (numberOfMarks === 'ASC' || numberOfMarks === 'DESC')
+            ) {
+              orderBy['post.numberOfMarks'] = numberOfMarks;
+            }
+          
+            const queryBuilder = this.postRepository
+              .createQueryBuilder('post')
               .innerJoinAndSelect('post.author', 'author')
               .leftJoinAndMapMany(
                 'post.marks',
                 MarksEntity,
                 'marks',
-                'marks.post = post.id',
+                'marks.post = post.id'
               )
-              .orderBy(orderBy)
-              .where(course !== undefined ? 'author.course = :course' : '1 = 1', { course })
+              .where(course !== undefined ? 'author.course = :course' : '1 = 1', {
+                course,
+              })
               .andWhere(year !== undefined ? 'author.year = :year' : '1 = 1', { year });
           
             if (minMark !== undefined) {
-              queryBuilder.andWhere('marks.value >= :minMark', { minMark });
-              
-            } if( maxMark !== undefined)
-            {
-                queryBuilder.andWhere('marks.value <= :maxMark', { maxMark });
+              queryBuilder.andWhere('post.averageMark >= :minMark', { minMark });
             }
+          
+            if (maxMark !== undefined) {
+              queryBuilder.andWhere('post.averageMark <= :maxMark', { maxMark });
+            }
+          
+            queryBuilder.orderBy(orderBy);
           
             return from(queryBuilder.getMany());
           }
+          
+          
         findPostById(id:number):Observable<IPost>{
             return from(this.postRepository.findOne({ where: { id } }));
         }

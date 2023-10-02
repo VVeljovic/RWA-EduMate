@@ -11,14 +11,16 @@ export class FiltersComponent {
   selectedDirection:string = '';
   selectedMinMark:number=-1;
   selectedMaxMark:number = -1;
-  @Output() filtersSelected: EventEmitter<{ course: string, year: number,sort:string,minMark:number,maxMark:number }> = new EventEmitter();  showSelectedOptions()
+  selectedDirectionOfMarks='';
+  @Output() filtersSelected: EventEmitter<{ course: string, year: number,sort:string,minMark:number,maxMark:number,sortMarks:string }> = new EventEmitter();  showSelectedOptions()
   {
     const selectedFilters = {
       course:this.selectedCourse,
       year:this.selectedYear,
       sort:this.selectedDirection,
       minMark:this.selectedMinMark,
-      maxMark:this.selectedMaxMark
+      maxMark:this.selectedMaxMark,
+      sortMarks:this.selectedDirectionOfMarks
     }
     this.filtersSelected.emit(selectedFilters);
   }

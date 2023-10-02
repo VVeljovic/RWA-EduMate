@@ -6,6 +6,27 @@
       <thead>
         <tr class="filters">
           <th>
+            Number of marks
+            <select id="milestone-filter" class="form-control"[(ngModel)]="selectedDirectionOfMarks">
+              <option></option>
+              <option>ASC</option>
+              <option>DESC</option>
+            </select>
+          </th>
+        </tr>
+        <tr class="filters">
+          <th>
+            Sort
+            <select id="milestone-filter" class="form-control"[(ngModel)]="selectedDirection">
+              <option></option>
+              <option>ASC</option>
+              <option>DESC</option>
+            </select>
+          </th>
+        </tr>
+        <tr class="filters">
+          
+          <th>
             Course
             <select id="assigned-user-filter" class="form-control"  [(ngModel)]="selectedCourse">
               <option>RII</option>
@@ -28,16 +49,7 @@
             </select>
           </th>
         </tr>
-        <tr class="filters">
-          <th>
-            Sort
-            <select id="milestone-filter" class="form-control"[(ngModel)]="selectedDirection">
-              <option></option>
-              <option>ASC</option>
-              <option>DESC</option>
-            </select>
-          </th>
-        </tr>
+        
         <tr class="filters">
           <th>
             MinMark

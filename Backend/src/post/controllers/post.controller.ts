@@ -67,10 +67,11 @@ export class PostController {
     @Query('sort') sort?: string,
     @Query('minMark') minMark?: number,
     @Query('maxMark') maxMark?: number,
+    @Query('numberOfMarks') numberOfMarks?: string,
   ): Observable<IPost[]> 
  {
-  console.log(course,year,sort);
-   return(this.postService.getFilteredPosts(course,year,sort,minMark,maxMark));
+  console.log(course,year,sort,numberOfMarks);
+   return(this.postService.getFilteredPosts(course,year,sort,minMark,maxMark,numberOfMarks));
  }
  @UseGuards(JwtAuthGuard)
  @Get('getLastPostOfUser')

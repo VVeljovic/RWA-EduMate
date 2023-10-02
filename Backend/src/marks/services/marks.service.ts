@@ -15,6 +15,7 @@ export class MarksService {
         mark.post=post;
         mark.rater=user;
         this.postService.incrementNumberOfMarks(post.id);
+       
         return from(this.marksRepository.save(mark));
     }
     calculateAverageMarkForPost(postId: number): Observable<number> {
@@ -27,6 +28,7 @@ export class MarksService {
         ).pipe(
           map(result => {
             this.postService.updateAverageMarks(postId,result.averageMark);
+            console.log(result.averageMark);
             return result.averageMark || 0;
           }),
         );

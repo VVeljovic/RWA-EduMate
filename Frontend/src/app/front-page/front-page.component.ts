@@ -7,9 +7,9 @@ import { FiltersComponent } from '../components/filters/filters.component';
 })
 export class FrontPageComponent {
   @ViewChild(FiltersComponent) filtersComponent!: FiltersComponent;
-  selectedFilters!:{course:string,year:number,sort:string,minMark:number,maxMark:number}
-  onFiltersSelected(filters:{course:string,year:number,sort:string,minMark:number,maxMark:number}){
-    console.log(filters.course,filters.year,filters.sort);
+  selectedFilters!:{course:string,year:number,sort:string,minMark:number,maxMark:number,sortMarks:string}
+  onFiltersSelected(filters:{course:string,year:number,sort:string,minMark:number,maxMark:number,sortMarks:string}){
+    console.log(filters.course,filters.year,filters.sort,filters.sortMarks);
     this.selectedFilters=filters;
   }
 }

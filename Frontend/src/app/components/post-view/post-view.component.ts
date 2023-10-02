@@ -22,7 +22,7 @@ export class PostViewComponent implements OnInit, OnChanges {
   public postImages$: Observable<{ [imageName: string]: Blob }>;
   public images: string[] = [];
   selectedImage: string | ArrayBuffer | null = null;
-  @Input() selectedFilters!: { course: string; year: number,sort:string,minMark:number,maxMark:number};
+  @Input() selectedFilters!: { course: string; year: number,sort:string,minMark:number,maxMark:number,sortMarks:string};
 
   constructor(private store: Store<{ posts: Post[]; postImages: { [imageName: string]: Blob } }>, private dialogRef: MatDialog) {
     this.post$ = this.store.select(selectPosts);
