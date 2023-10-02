@@ -94,7 +94,7 @@ export class PostService {
                     .createQueryBuilder('post')
                     .innerJoinAndSelect('post.author', 'author')
                     .where('author.username = :username', { username })
-                    .orderBy('post.createdAt', 'DESC') // Sortiranje po createdAt opadajuće
+                    .orderBy('post.createdAt', 'DESC') 
                     .getOne()
             );
         }

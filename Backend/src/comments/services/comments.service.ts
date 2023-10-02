@@ -20,7 +20,7 @@ export class CommentsService {
         return from(
             this.commentRepository
               .createQueryBuilder('comment')
-              .innerJoinAndSelect('comment.author', 'author') // Spojite komentare i korisnike
+              .innerJoinAndSelect('comment.author', 'author')
               .where('comment.postId = :postId', { postId })
               .getMany()
           );

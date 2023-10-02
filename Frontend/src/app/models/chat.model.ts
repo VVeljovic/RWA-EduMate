@@ -1,7 +1,7 @@
 
 export interface Chat { 
     id?:number;
-    username?:string;
+    username:string;
     text:string;
     createdAt?:Date
 }

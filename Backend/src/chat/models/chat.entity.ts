@@ -13,7 +13,7 @@ import {
     @Column()
     username: string;
     
-    @Column({ unique: true })
+    @Column()
     text: string;
     
     @CreateDateColumn({default:()=>'CURRENT_TIMESTAMP'})

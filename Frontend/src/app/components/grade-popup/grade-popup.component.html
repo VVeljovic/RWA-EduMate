@@ -1,7 +1,7 @@
 <main>
     <form>
       <h1>Rate Post</h1>
-      <p>How was your experience using our application? Your rating matter!</p>
+      <p>Please give rate this post</p>
   
       <div class="rating">
         <input type="radio" name="rating" id="rating-1" value="1" [(ngModel)]="selectedRating">
@@ -29,7 +29,7 @@
   
       <div class="action-group">
         <input type="button" value="Submit" (click)="rate()">
-        <input type="reset" value="Cancel">
+        <input type="reset" value="Cancel" (click)="reset()">
       </div>
     </form>
   </main>

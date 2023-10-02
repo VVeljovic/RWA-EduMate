@@ -13,11 +13,14 @@ export class ChatService {
     {
 
     }
-    sendMessage(message: string):void{
-        this.socket.emit('sendMessage',message);
+    sendMessage(text: string,username?:string):void{
+      console.log(text,username);
+      const data = {text,username};
+        this.socket.emit('sendMessage',data);
     }
-    getNewMessage():Observable<string>{
-        return this.socket.fromEvent<string>('newMessage');
+    getNewMessage():Observable<any>{
+      this.socket.fromEvent<any>('newMessage').subscribe(re=>{console.log(re)});
+        return this.socket.fromEvent<any>('newMessage');
     }
     getUsersOnSameCourse():Observable<User[]>{
         let token: string | undefined;
